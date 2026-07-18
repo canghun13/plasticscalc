@@ -442,6 +442,15 @@ Add new entries at the top.
 - Added GA4 once globally through `assets/js/site.js` using `G-4HCMML5ENX`; localhost is excluded. Added `robots.txt`, `sitemap.xml`, `llms.txt`, and basic SVG favicon. `CNAME` was preserved.
 - `build-pages.mjs` is the static-page generator. It is a development helper only; generated HTML is committed for GitHub Pages crawlability.
 
+### 2026-07-18 — Source-reviewed interpretation guides
+
+- Added two substantive, static guides and linked them from the Guides hub and sitemap:
+  - `guides/clamp-force-and-projected-area.html`
+  - `guides/cooling-time-estimates.html`
+- Clamp guide records the projection-area/cavity-pressure distinction and a validation sequence. It links to KEYENCE’s injection molding formula reference and MIT manufacturing course material.
+- Cooling guide documents the one-dimensional estimate’s inputs and omissions, plus a controlled validation method. It links to BASF’s cooling-time technical information and Autodesk Moldflow documentation.
+- Re-ran `verify.mjs`: 25 HTML pages, 25 unique titles, 25 unique canonicals, zero missing local absolute links. `git diff --check` passed.
+
 ### Open issues / next actions
 
 1. Production verification on 2026-07-18: `https://plasticscalc.com/` and `https://canghun13.github.io/plasticscalc/` returned HTTP 200. The deployed homepage includes its expected title and self-canonical. The deployed `assets/js/site.js` contains GA4 ID `G-4HCMML5ENX` and its `gtag('config', ...)` call.

@@ -684,6 +684,19 @@ If this checklist is not complete, the task is not complete.
 
 ---
 
+## 20. Approved Reference Layout — Locked Without Owner Approval
+
+The owner has explicitly approved the desktop layout shown in the 2026-07-18 reference captures for the Injection Molding evidence workflow and the Materials data-selection workflow. Treat that rendered relationship as the current baseline design.
+
+- Preserve the overall page container and maximum widths, left/right page padding, section widths, readable text line lengths, and the relationship between panels and technical tables.
+- In particular, preserve the dense engineering-reference character: readable copy remains narrower than data tables where the content warrants it, and workflow panels/tables align as one coherent page system rather than inheriting arbitrary full-width or narrow-width overrides.
+- Do **not** change global container, `max-width`, spacing-token, shared section, shared panel, grid, flex, responsive-layout, or other site-wide layout CSS without first presenting the proposed visual change and receiving the owner's explicit approval.
+- Future work may modify content, functionality, SEO, calculators, metadata, and internal links while preserving this layout baseline.
+- If a layout change appears necessary for correctness, accessibility, or a new content type, stop before implementation: explain the reason, affected page types, expected visual difference, and regression-testing plan, then wait for approval. Local page-specific fixes that alter the approved visual relationship are also subject to this rule.
+- Any owner-approved layout change must be recorded here with the affected selectors, reference viewport(s), before/after rationale, and production verification result.
+
+---
+
 ### 2026-07-18 Markup integrity remediation
 
 - Investigated the deployed Materials-page symptom `resin-weight.html">Resin Weight Calculator` as a shared generation issue, not a one-off content typo.

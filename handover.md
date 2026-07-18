@@ -471,6 +471,22 @@ Add new entries at the top.
 - Invalid or non-finite calculations no longer display a misleading numeric result; users receive an actionable correction message instead.
 - Validation run: `node --check assets/js/calculators.js`, `verify.mjs` (27 unique titles/canonicals with no missing local absolute links), and `git diff --check` all passed.
 
+### 2026-07-18 — First-release full quality audit
+
+- Audited the complete repository, README, handover, branch/remote, file structure, CNAME, robots, llms, sitemap, all 14 calculators, and all 27 generated HTML pages before modifying the existing structure.
+- Calculator formula verification: clamp force follows projected area × cavity pressure; shot/volume/mass use the stated density relationships; cycle is the sum of phases; cooling uses the documented flat-wall Fourier-style estimate; output, cavity, scrap, utilization, material cost and amortization formulas match their displayed calculations. Normal-value regression tests now cover all 14 tools in `calculator-tests.mjs`.
+- Found and corrected one engineering-definition issue: Keyence defines molding shrinkage as `(cavity − molded part) ÷ cavity`, so Mold Shrinkage now calculates cavity dimension as `molded part ÷ (1 − shrinkage)` rather than multiplying by `(1 + shrinkage)`. The page formula, default result (101.52 mm at 1.5%), worked example, and validation for shrinkage below 100% were updated together.
+- Added actual numerical worked examples to every calculator page and clarified that the first release intentionally uses displayed fixed engineering units rather than a unit switcher. Existing input labels make each unit explicit; no implicit unit conversion is claimed.
+- Replaced generic related-tool lists with process-flow links: projected area → clamp force; shot size → shot volume/resin weight; cycle/cooling → output/cavity planning; resin weight → cost/scrap/amortization. Relevant guides are linked where they exist.
+- Expanded `verify.mjs` to check every indexable page for unique title, description, H1, self-canonical, OG title, structured data, GA4 script, valid local absolute links, exact sitemap membership, robots sitemap directive, and CNAME. `404.html` is deliberately excluded from sitemap.
+- Final checks before commit: 14 calculator regression tests passed; JavaScript syntax check passed; 27 HTML pages / 26 indexable pages / 26 sitemap URLs have no audit issues; `git diff --check` passed. GA4 remains centrally loaded once from `assets/js/site.js` with `G-4HCMML5ENX`.
+
+### Current audit status and next priorities
+
+- Current total: 14 calculators, 4 guides, 27 generated HTML files (26 indexable; 404 excluded).
+- No new calculator was added because the core workflow did not have a safety- or usability-critical gap; the priority was accuracy and completeness of the initial set.
+- Next priority: use real material-grade documentation to introduce carefully scoped material presets only where the data source, temperature basis, and limitations can be shown. Then add browser-level interaction tests and review GA4 Realtime/consent requirements before broader SEO expansion.
+
 ### Open issues / next actions
 
 1. Production verification on 2026-07-18: `https://plasticscalc.com/` and `https://canghun13.github.io/plasticscalc/` returned HTTP 200. The deployed homepage includes its expected title and self-canonical. The deployed `assets/js/site.js` contains GA4 ID `G-4HCMML5ENX` and its `gtag('config', ...)` call.

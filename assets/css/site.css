@@ -54,3 +54,23 @@
   .section{padding:30px 0}
   .card,.reference-block,.decision-block,.bottom-block,.guide-section,.reading-section,.materials-reference{padding:16px}
 }
+
+/* Guides hub: retain the engineering-use rule without a second oversized content block. */
+.guide-protocol{display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr);gap:0;margin:24px auto 40px;border-block:1px solid var(--line);background:var(--paper-2)}
+.guide-protocol-title{padding:20px 22px;border-right:1px solid var(--line)}
+.guide-protocol-title .eyebrow{margin-bottom:8px}
+.guide-protocol-title h2{margin:0;font-size:1.16rem;line-height:1.25}
+.guide-protocol-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.guide-protocol-steps p{display:grid;gap:7px;margin:0;padding:20px;border-right:1px solid var(--line);font-size:.9rem;line-height:1.48}
+.guide-protocol-steps p:last-child{border-right:0}
+.guide-protocol-steps strong{color:#7b3218;font:800 .67rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.guide-protocol-steps span{color:var(--muted)}
+@media(max-width:900px){
+  .guide-protocol{grid-template-columns:1fr;margin:18px auto 30px}
+  .guide-protocol-title{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media(max-width:620px){
+  .guide-protocol-steps{grid-template-columns:1fr}
+  .guide-protocol-steps p{padding:15px 16px;border-right:0;border-bottom:1px solid var(--line)}
+  .guide-protocol-steps p:last-child{border-bottom:0}
+}

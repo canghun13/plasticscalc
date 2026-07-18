@@ -198,7 +198,7 @@
 .materials-table-area table{margin:0}
 .materials-reference-notes{margin-top:13px}
 .material-data-workflow{max-width:var(--measure-data)}
-.material-data-workflow>header{max-width:var(--measure-readable)}
+.material-data-workflow>header{max-width:var(--measure-readable);padding: var(--space-panel);}
 .material-data-workflow>.small,.material-data-workflow>p:last-child{max-width:var(--measure-readable)}
 @media(max-width:760px){
   .materials-page-shell{max-width:none}

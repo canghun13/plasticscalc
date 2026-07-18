@@ -444,9 +444,9 @@ Add new entries at the top.
 
 ### Open issues / next actions
 
-1. Configure GitHub Pages to deploy `main` root and verify Cloudflare DNS/HTTPS plus live GA4 in production.
+1. Production verification on 2026-07-18: `https://plasticscalc.com/` and `https://canghun13.github.io/plasticscalc/` returned HTTP 200. The deployed homepage includes its expected title and self-canonical. The deployed `assets/js/site.js` contains GA4 ID `G-4HCMML5ENX` and its `gtag('config', ...)` call.
 2. Validate formulas against material-specific supplier data sheets and add cited long-form guides (especially cooling, shrinkage, pressure and machine capacity) before expanding calculator count.
-3. Add a consent solution if legally required for target visitor jurisdictions before relying on GA4 cookies.
+3. Add a consent solution if legally required for target visitor jurisdictions before relying on GA4 cookies, and confirm an event in the GA4 Realtime report using a normal browser visit.
 4. Add automated link/metadata and calculator test scripts when a standard local runtime/toolchain is adopted.
 
 ### Baseline — Project Initialization

@@ -576,3 +576,8 @@ When an AI coding agent receives this repository:
 - Validation before commit: `calculator-ui-tests.mjs`, `markup-tests.mjs`, `verify.mjs`, `calculator-tests.mjs`, `consent-tests.mjs`, JS syntax checks, and `git diff --check` passed.
 - Next priority: after deployment, cache-bypass check Contact and a calculator at the production domain; retain `.calc-field` and `.calc-workstation` as the only supported calculator layout contract.
 - Deployment verification after commit `52aa581`: cache-bypassed production `calculators.js` included `calc-field`, `calc-workstation`, and the safe query-selector field lookup; `contact.html` returned the published Contact policy. A production-browser Clamp Tonnage audit found three fields with label/input/unit rectangles contained and vertically ordered within each field, no horizontal overflow, and the expected 220 US tons result. The live Contact page has no form, includes Privacy and engineering-disclaimer links, and has no horizontal overflow.
+
+### 2026-07-18 Verified public contact route
+
+- The site owner supplied `canghun13@naver.com` as the verified public contact address. Contact now uses a visible `mailto:` link for general inquiries, calculator feedback/error reports, technical correction suggestions, and privacy questions.
+- Updated the Contact copy and Privacy-page contact guidance together. The site remains static and does not add a server-side form, account system, or an invented support channel.

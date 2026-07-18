@@ -18,7 +18,8 @@
 .reference-block h2,.decision-block h2,.bottom-block h2,.guide-section h2,.reading-section h2{font-size:1.1rem;margin:0 0 .65rem}
 .reference-block p:last-child,.decision-block p:last-child,.bottom-block p:last-child,.guide-section p:last-child,.reading-section p:last-child{margin-bottom:0}
 .reference-method{grid-column:1/-1;background:#e2e6d7;border-color:var(--line-dark)}
-.reference-method .formula,.guide-section .formula{margin:0;padding:0;border:0;background:transparent}
+.reference-method .formula,.guide-section .formula{position:static;margin:0;padding:0;overflow:visible;border:0;background:transparent;white-space:normal}
+.reference-method .formula:before,.guide-section .formula:before{content:none}
 .reference-example{border-top:4px solid var(--signal);background:#f8ede5}
 .decision-caution{border-top:4px solid var(--signal)}
 .decision-limits{background:var(--paper-2)}

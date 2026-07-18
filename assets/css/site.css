@@ -47,7 +47,7 @@
 @media(max-width:900px){
   .wrap{width:min(var(--measure),92%)}
   .hero{padding:36px 0 31px;background:var(--paper)}
-  .materials-workbench,.guide-layout,.reading-layout,.calc-reference-grid,.calc-decision-grid,.calc-bottom-grid{grid-template-columns:1fr}
+  .tool-index,.materials-workbench,.guide-layout,.reading-layout,.calc-reference-grid,.calc-decision-grid,.calc-bottom-grid{grid-template-columns:1fr}
   .reference-method,.guide-section:first-child,.guide-section:has(.formula),.guide-section:last-child,.reading-layout>.lead,.reading-section:first-of-type{grid-column:auto}
 }
 @media(max-width:520px){

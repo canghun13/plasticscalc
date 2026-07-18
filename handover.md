@@ -497,6 +497,8 @@ Add new entries at the top.
 - Enriched every existing calculator page with tool-specific operational use, primary result drivers, and a common mistake. Added `enrich-tool-pages.mjs` to retain this content after every static regeneration; no new calculator URLs were created.
 - Reworked the homepage around machine sizing, cycle/output, and cost workflows. Replaced short About, Privacy, and Disclaimer pages with site-specific explanatory content. Privacy accurately describes opt-in GA4 behavior, and the disclaimer distinguishes estimates from approvals and supplier/process validation.
 - Validation after the remediation pass: 27 HTML files, 26 indexable/self-canonical sitemap URLs, no broken local absolute links, no detected non-ASCII corruption in generated HTML, and all 14 calculator regression tests passed.
+- Hub and guide enrichment pass: expanded Tools, Injection Molding, Materials, and Guides hubs with decision workflows, scope boundaries, selection guidance, related reference paths, and practical callouts. Added operational FAQ sections to all four existing guides. `enrich-site-pages.mjs` preserves this content across future static builds.
+- Re-ran generation, verifier, calculator regression tests, non-ASCII scan, and diff check successfully; no new public URLs were introduced.
 - Next priority: use real material-grade documentation to introduce carefully scoped material presets only where the data source, temperature basis, and limitations can be shown. Then add browser-level interaction tests and review GA4 Realtime/consent requirements before broader SEO expansion.
 
 ### Open issues / next actions

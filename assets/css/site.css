@@ -111,7 +111,7 @@
 .guide-protocol{margin:18px auto 28px}
 .guide-protocol-title{padding:var(--space-panel)}
 .guide-protocol-steps p{padding:var(--space-panel)}
-.hub-decision-panel.section,.material-data-workflow.section{padding-block:28px}
+.hub-decision-panel.section,.material-data-workflow.section{padding-block:0;padding:var(--space-panel);}
 .hub-decision-panel>div:first-child,.material-data-workflow>div:first-child{margin-bottom:12px}
 .hub-decision-grid{gap:8px}
 .hub-decision-grid article{padding:var(--space-panel-tight)}
@@ -198,7 +198,7 @@
 .materials-table-area table{margin:0}
 .materials-reference-notes{margin-top:13px}
 .material-data-workflow{max-width:var(--measure-data)}
-.material-data-workflow>header{max-width:var(--measure-readable);padding: var(--space-panel);}
+.material-data-workflow>header{max-width:var(--measure-readable);}
 .material-data-workflow>.small,.material-data-workflow>p:last-child{max-width:var(--measure-readable)}
 @media(max-width:760px){
   .materials-page-shell{max-width:none}

@@ -457,6 +457,13 @@ Add new entries at the top.
 - The guide distinguishes complete shot mass from injection volume, cautions that a quoted PS shot-weight rating is not a material-neutral barrel capacity, and directs users to grade-specific material and injection-unit documentation. It cites ARBURG technical data and a BASF material-data example.
 - Re-ran `verify.mjs`: 26 HTML pages, 26 unique titles, 26 unique canonicals, zero missing local absolute links. `git diff --check` passed.
 
+### 2026-07-18 — Cost-estimate interpretation guide
+
+- Added `guides/injection-molding-cost-estimate.html`, linked from the Guides hub and sitemap.
+- It defines the cost stack, separates one-time tooling from recurring costs, describes the scope of the material/scrap/amortization calculators, and identifies conversion, quality, post-process and logistics costs that require production data or supplier validation.
+- Sources linked: Autodesk Moldflow Cost Adviser and Protolabs cost-factor guidance.
+- Re-ran `verify.mjs`: 27 HTML pages, 27 unique titles, 27 unique canonicals, zero missing local absolute links. `git diff --check` passed.
+
 ### Open issues / next actions
 
 1. Production verification on 2026-07-18: `https://plasticscalc.com/` and `https://canghun13.github.io/plasticscalc/` returned HTTP 200. The deployed homepage includes its expected title and self-canonical. The deployed `assets/js/site.js` contains GA4 ID `G-4HCMML5ENX` and its `gtag('config', ...)` call.

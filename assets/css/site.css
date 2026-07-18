@@ -90,3 +90,38 @@
 .material-data-workflow .hub-decision-grid article{background:#fffdf7}
 @media(max-width:900px){.hub-decision-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.hub-decision-grid{grid-template-columns:1fr}.hub-decision-panel,.material-data-workflow{padding-top:28px;padding-bottom:28px}}
+
+/* Shared vertical rhythm: compact reference panels around the information they contain. */
+:root{
+  --space-section:32px;
+  --space-section-mobile:24px;
+  --space-panel:16px;
+  --space-panel-tight:14px;
+  --space-grid:12px;
+  --space-block:20px;
+}
+.section{padding-block:var(--space-section)}
+.card{padding:var(--space-panel)}
+.card:before{margin-bottom:10px}
+.calc-reference-grid,.calc-decision-grid,.calc-bottom-grid{gap:var(--space-grid);margin-block:var(--space-block)}
+.reference-block,.decision-block,.bottom-block,.guide-section,.reading-section{padding:var(--space-panel)}
+.materials-workbench{gap:var(--space-grid)}
+.materials-reference{padding:var(--space-panel)}
+.materials-followup{padding-block:22px}
+.guide-protocol{margin:18px auto 28px}
+.guide-protocol-title{padding:var(--space-panel)}
+.guide-protocol-steps p{padding:var(--space-panel)}
+.hub-decision-panel.section,.material-data-workflow.section{padding-block:28px}
+.hub-decision-panel>div:first-child,.material-data-workflow>div:first-child{margin-bottom:12px}
+.hub-decision-grid{gap:8px}
+.hub-decision-grid article{padding:var(--space-panel-tight)}
+.hub-decision-panel>.small,.material-data-workflow>.small{margin-top:10px}
+@media(max-width:520px){
+  .section{padding-block:var(--space-section-mobile)}
+  .card,.reference-block,.decision-block,.bottom-block,.guide-section,.reading-section,.materials-reference{padding:var(--space-panel-tight)}
+  .calc-reference-grid,.calc-decision-grid,.calc-bottom-grid{margin-block:18px}
+  .materials-followup{padding-block:18px}
+  .guide-protocol{margin:14px auto 22px}
+  .guide-protocol-title,.guide-protocol-steps p{padding:var(--space-panel-tight)}
+  .hub-decision-panel.section,.material-data-workflow.section{padding-block:22px}
+}

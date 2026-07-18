@@ -430,6 +430,18 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-07-18 — Shared spacing calibration (content-driven density)
+
+- Scope: corrected shared vertical spacing across the 28 public HTML pages without changing the industrial engineering-reference visual direction, calculator formulas, calculator DOM, page URLs, or SEO content.
+- Root cause: the original visual system retained a 50px section default (later reduced to 38px) alongside 19–20px reference/panel padding, 28px calculator content-grid margins, 20px guide-protocol cells, and a 28px narrow-screen hub override. Short information blocks therefore inherited the same large vertical footprint as long-form sections.
+- Shared fix in `assets/css/site.css`: added named spacing tokens and applied them at the shared component boundary. Desktop sections now use 32px vertical padding; standard cards/reference/decision/guide/material panels use 16px; dense hub cards use 14px; reference grids use 12px gaps and 20px block margins. Mobile uses 24px sections, 14px panels, 18px reference-grid margins, and 22px compact hub sections. Guide protocol cells, Materials follow-up, and hub evidence spacing now follow the same rhythm.
+- The calculator workstation and `.calc-field` contract were deliberately excluded from this calibration. This preserves the established label → input → unit component layout and prevents a repeat of the prior global-form regression.
+- Added `refresh-assets.mjs` as the final static-build step and moved generated pages to stylesheet release `20260718-spacing-1`, so a deployed CSS update is not hidden behind the previous cached stylesheet query string. It recursively updates generated HTML only; it does not alter page content.
+- Rendered verification: reviewed homepage, Tools, Injection Molding, Materials, a representative guide, About, and all 14 calculator pages at the default desktop viewport and 390px mobile viewport. All reviewed pages had one H1, loaded the new stylesheet, had no horizontal overflow, and used the expected 32px/16px desktop or 24px/14px mobile shared spacing. Hub decision sections correctly use the tighter 28px/22px section treatment.
+- Calculator regression result: every calculator retained a contained, vertical label/input/unit field component at desktop and mobile (0 field-order or containment failures across all 14 pages). No calculator formulas or interaction logic changed.
+- Mandatory Quality Gate: [x] automated checks passed (`content-value-tests.mjs`, `markup-tests.mjs`, `verify.mjs`, `calculator-tests.mjs`, `calculator-ui-tests.mjs`, `consent-tests.mjs`, JavaScript syntax, and `git diff --check`); [x] representative pages visually checked; [x] representative calculators and all calculator forms checked; [x] desktop checked; [x] mobile checked; [x] no new broken layout; [x] no calculator regression; [x] handover updated.
+- Remaining follow-up: after every later shared layout change, retain this token-based spacing system and repeat the Quality Gate. Avoid reintroducing fixed minimum heights or page-specific vertical-spacing overrides for short content blocks.
+
 ### 2026-07-18 — Content & Value Audit (people-first and AdSense-readiness)
 
 - Scope audited: 28 public HTML files (27 indexable): homepage; Tools, Injection Molding, Materials, and Guides hubs; all 14 calculators; four guides; About; Contact; Privacy; Disclaimer; and 404. The audit used rendered-page review, source review, calculator behavior checks, internal-link/metadata checks, and current official Google guidance rather than an approval prediction.

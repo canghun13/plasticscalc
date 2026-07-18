@@ -16,6 +16,10 @@ expect(count(injectionHub, /class="workflow-step"/g) === 4, 'Injection hub must 
 const materials = read('tools/materials/index.html');
 expect(materials.includes('Choose a material property by the calculation, state, and decision.'), 'Materials hub is missing the property-selection workflow.');
 expect(count(materials, /data-label="Property"/g) === 5, 'Materials hub must retain five property-to-calculator rows.');
+for (const className of ['materials-page-shell', 'materials-tool-cards', 'materials-readable-copy', 'materials-table-area', 'materials-reference-notes']) {
+  expect(materials.includes(className), `Materials hub is missing its ${className} width region.`);
+}
+expect(!materials.includes('materials-workbench'), 'Materials hub must not fall back to the single-width workbench structure.');
 for (const term of ['Solid density', 'Melt density', 'Linear shrinkage', 'Thermal diffusivity', 'Purchase mass and price']) {
   expect(materials.includes(term), `Materials hub is missing ${term}.`);
 }

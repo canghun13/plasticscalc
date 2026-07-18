@@ -180,3 +180,29 @@
   .material-property-table td{padding:4px 0;border:0}
   .material-property-table td::before{content:attr(data-label);display:block;margin-bottom:2px;color:#7b3218;font:800 .61rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase}
 }
+
+/* Width hierarchy: Materials keeps readable copy independent from its data tables. */
+:root{
+  --measure-cards:760px;
+  --measure-readable:720px;
+  --measure-data:1120px;
+}
+.materials-page-shell{max-width:var(--measure-data);margin-inline:auto}
+.materials-tool-cards{max-width:var(--measure-cards)}
+.materials-tool-cards .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.materials-reference-area{margin-top:24px}
+.materials-readable-copy,.materials-reference-notes{max-width:var(--measure-readable)}
+.materials-readable-copy h2{margin-bottom:.55rem}
+.materials-readable-copy p,.materials-reference-notes p{max-width:var(--measure-readable)}
+.materials-table-area{max-width:var(--measure-data);margin-top:16px}
+.materials-table-area table{margin:0}
+.materials-reference-notes{margin-top:13px}
+.material-data-workflow{max-width:var(--measure-data)}
+.material-data-workflow>header{max-width:var(--measure-readable)}
+.material-data-workflow>.small,.material-data-workflow>p:last-child{max-width:var(--measure-readable)}
+@media(max-width:760px){
+  .materials-page-shell{max-width:none}
+  .materials-tool-cards{max-width:none}
+  .materials-tool-cards .grid{grid-template-columns:1fr}
+  .materials-reference-area{margin-top:20px}
+}

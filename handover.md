@@ -534,6 +534,78 @@ When an AI coding agent receives this repository:
 
 ---
 
+## 19. Mandatory Quality Gate Before Commit / Push
+
+This is a permanent release rule. Apply it before every commit/push for a major change, especially after shared CSS, header/footer, grid/flex/layout, calculator-form, common-component, navigation, or large content/template work.
+
+### 1. Automated checks
+
+Run and maintain reusable automated checks for:
+
+- Broken links
+- Malformed HTML
+- Duplicate IDs
+- JavaScript errors
+- Sitemap and internal links
+- Calculator default behavior
+
+### 2. Visual regression sampling
+
+Do not rely on source review alone, and do not require a browser pass over every page for every change. Verify these representative page types in a real rendered browser:
+
+- Homepage
+- Tools hub
+- Injection Molding hub
+- Materials hub
+- One representative guide/blog page
+- About or one legal page
+
+Also verify at least five calculators with different UI structures. Include, where available:
+
+- A simple-input calculator
+- A multi-input calculator
+- A calculator with unit conversion or differing units
+- A calculator with a more detailed result panel
+- A calculator combined with a table/reference section
+
+### 3. Desktop and mobile
+
+Check all representative pages and calculators at desktop and mobile viewports. Verify:
+
+- Label/input/unit association
+- Overflow and clipped text
+- Grid/flex integrity
+- Button placement
+- Navigation
+- Excessive whitespace
+- Card/panel alignment
+- Result readability
+
+### 4. Full visual-check trigger
+
+Broaden visual checking beyond the representative sample when there is a global CSS or design-system change, calculator common-component change, responsive-breakpoint change, or a known post-deployment visual regression.
+
+### 5. No blind completion
+
+Do not declare UI healthy from code and automated tests alone. When visual verification is available, render and inspect it. If visual verification is unavailable, record that limitation explicitly in this handover and the final work report.
+
+### 6. Required checklist
+
+Before declaring a major task complete, confirm:
+
+- [ ] Automated checks passed
+- [ ] Representative pages visually checked
+- [ ] Representative calculators visually checked
+- [ ] Desktop checked
+- [ ] Mobile checked
+- [ ] No new broken layout
+- [ ] No calculator regression
+- [ ] handover.md updated
+
+If this checklist is not complete, the task is not complete.
+
+---
+
 ### 2026-07-18 Markup integrity remediation
 
 - Investigated the deployed Materials-page symptom `resin-weight.html">Resin Weight Calculator` as a shared generation issue, not a one-off content typo.

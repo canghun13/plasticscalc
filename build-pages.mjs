@@ -38,3 +38,4 @@ page({path:'contact.html',title:'Contact & Calculator Feedback | PlasticsCalc',d
 await import('./sanitize-pages.mjs');
 await import('./enrich-tool-pages.mjs');
 await import('./enrich-site-pages.mjs');
+await import('./enrich-layout.mjs');

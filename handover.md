@@ -430,6 +430,16 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-07-18 — Layout density and information-hierarchy calibration
+
+- Scope was deliberately limited to quality correction of the existing carbon/paper/orange/lime industrial engineering-reference system. No calculator formula, URL, canonical, navigation architecture, or calculator input DOM contract was changed.
+- Added `enrich-layout.mjs` as the final repeatable build step. It turns the existing calculator explanation content into distinct responsive reference, decision, caution/limitation, FAQ, and related-tool panels; it also converts the four guide pages and About/Privacy/Disclaimer/Contact pages from long undifferentiated document flows into grouped reading panels. The source content remains static, crawlable, and is regenerated consistently by `build-pages.mjs`.
+- Desktop density calibration in `assets/css/site.css`: content measure is now 1320px with a 94% responsive shell; standard section rhythm is 38px; hero padding and its pale-side treatment were tightened; dense tool grids now use `auto-fit` rather than retaining empty `auto-fill` columns; card padding/minimum height were reduced without changing the square-edged visual language.
+- Materials hub was rebuilt as a purpose-specific workbench: the weight/cost tool path occupies the main panel, while grade-density guidance is a separate, visible reference aside. This removes the previous left-weighted two-card layout and uses the available desktop width without treating solid density as melt density.
+- Calculator pages now group Formula/Inputs/Worked example, operational decision guidance, caution/limitations, FAQ, and related tools into visually distinct blocks. At 900px and below those blocks intentionally fold to one column. The dedicated `.calc-workstation` / `.calc-field` form contract was not overridden, preventing a repeat of the label/input/unit regression.
+- Automated validation after regeneration passed: `markup-tests.mjs` (28 pages), `verify.mjs` (27 indexable pages, unique metadata/canonicals, sitemap and links), `calculator-tests.mjs` (14/14), `calculator-ui-tests.mjs` (all calculator field wrappers and mobile fallback), `consent-tests.mjs`, JavaScript syntax check, and `git diff --check`.
+- Structural coverage check confirmed layout panels on all 14 calculator pages, all four guides, all four legal/contact pages, and the Materials hub. Production-browser desktop/mobile visual confirmation remains the final release check after this deployment because the in-app browser blocks direct loopback access to the local static server.
+
 ### 2026-07-18 — Foundation and initial calculator release
 
 - Reviewed `README.md`, this handover, Git status, origin remote, `main` branch, and CNAME (`plasticscalc.com`) before implementation.

@@ -464,6 +464,13 @@ Add new entries at the top.
 - Sources linked: Autodesk Moldflow Cost Adviser and Protolabs cost-factor guidance.
 - Re-ran `verify.mjs`: 27 HTML pages, 27 unique titles, 27 unique canonicals, zero missing local absolute links. `git diff --check` passed.
 
+### 2026-07-18 — Calculator input and accessibility hardening
+
+- Updated shared `assets/js/calculators.js` for all 14 calculators: explicit error messages, non-negative numeric validation, domain checks for density, cycle time, cooling temperatures/diffusivity, cavity count, production life, and utilization time.
+- Added reset controls, `aria-live`/atomic result feedback, `role="alert"` validation feedback, unit descriptions attached to inputs, and `aria-invalid` state updates.
+- Invalid or non-finite calculations no longer display a misleading numeric result; users receive an actionable correction message instead.
+- Validation run: `node --check assets/js/calculators.js`, `verify.mjs` (27 unique titles/canonicals with no missing local absolute links), and `git diff --check` all passed.
+
 ### Open issues / next actions
 
 1. Production verification on 2026-07-18: `https://plasticscalc.com/` and `https://canghun13.github.io/plasticscalc/` returned HTTP 200. The deployed homepage includes its expected title and self-canonical. The deployed `assets/js/site.js` contains GA4 ID `G-4HCMML5ENX` and its `gtag('config', ...)` call.

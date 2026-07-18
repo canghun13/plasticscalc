@@ -40,4 +40,5 @@ await import('./enrich-tool-pages.mjs');
 await import('./enrich-site-pages.mjs');
 await import('./enrich-value-audit.mjs');
 await import('./enrich-layout.mjs');
+await import('./enrich-pre-expansion-audit.mjs');
 await import('./refresh-assets.mjs');

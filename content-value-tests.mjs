@@ -19,10 +19,10 @@ for (const file of calculators) {
 }
 
 for (const [file, required] of Object.entries({
-  'tools/index.html': ['hub-decision-grid', 'Machine fit', 'Cost exposure'],
-  'tools/injection-molding/index.html': ['hub-decision-grid', '01 / Geometry', '04 / Good output'],
-  'tools/materials/index.html': ['material-data-workflow', 'Finished part mass', 'Injection-unit volume', 'Filled and conditioned grades'],
-  'about.html': ['Corrections and scope', 'does not claim machine-maker certification']
+  'tools/index.html': ['workflow-map', 'Part and geometry', 'Material and cost'],
+  'tools/injection-molding/index.html': ['workflow-map', 'Mold opening and clamp force', 'Good output and commercial exposure'],
+  'tools/materials/index.html': ['material-data-workflow', 'Solid density', 'Melt density', 'Thermal diffusivity'],
+  'about.html': ['Corrections and scope', 'Source hierarchy and correction path', 'does not claim machine-maker certification']
 })) {
   const html = read(file);
   for (const value of required) if (!html.includes(value)) failures.push(`${file}: missing value-audit content: ${value}`);
@@ -33,4 +33,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(JSON.stringify({ calculatorPages: calculators.length, hubPages: 3, status: 'passed', checks: ['unique calculator decision blocks', 'specific calculator FAQs', 'no generic calculator filler', 'hub decision evidence', 'materials data workflow', 'method transparency'] }));
+console.log(JSON.stringify({ calculatorPages: calculators.length, hubPages: 3, status: 'passed', checks: ['unique calculator decision blocks', 'specific calculator FAQs', 'no generic calculator filler', 'evidence-led hub workflow maps', 'materials property workflow', 'method transparency'] }));

@@ -1,7 +1,7 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 
 // Keep the generated static pages on the current shared stylesheet after a CSS release.
-const CSS_RELEASE = '20260718-spacing-1';
+const CSS_RELEASE = '20260718-audit-1';
 async function findHtmlFiles(directory = '.') {
   const entries = await readdir(directory, { withFileTypes: true });
   const files = [];

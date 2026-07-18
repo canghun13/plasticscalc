@@ -125,3 +125,58 @@
   .guide-protocol-title,.guide-protocol-steps p{padding:var(--space-panel-tight)}
   .hub-decision-panel.section,.material-data-workflow.section{padding-block:22px}
 }
+
+/* Pre-expansion audit: size each content form for its evidence, not one global rectangle. */
+:root{
+  --measure:1260px;
+  --measure-reference:1120px;
+  --measure-prose:780px;
+}
+.wrap{width:min(var(--measure),92%)}
+.hub-decision-panel,.material-data-workflow,.home-reference{max-width:var(--measure-reference);margin-inline:auto}
+.hub-decision-panel>header,.material-data-workflow>header,.home-reference .section-intro{max-width:var(--measure-prose);margin-bottom:16px}
+.hub-decision-panel>header h2,.material-data-workflow>header h2,.home-reference h2{margin:.1rem 0 .55rem}
+.workflow-map,.home-evidence-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.workflow-map li{display:grid;grid-template-columns:48px minmax(0,1.08fr) minmax(250px,.92fr);gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid var(--line)}
+.workflow-step{display:grid;place-items:center;min-height:28px;background:var(--carbon);color:var(--lime);font:800 .69rem/1 var(--mono);letter-spacing:.07em}
+.workflow-map strong,.home-evidence-list dt{display:block;color:var(--carbon);font:800 .93rem/1.3 var(--sans)}
+.workflow-map p{margin:.28rem 0 0;font-size:.91rem;line-height:1.5}
+.workflow-next{padding-left:14px;border-left:3px solid var(--lime)}
+.workflow-next span{display:block;margin-bottom:4px;color:#7b3218;font:800 .62rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.home-evidence-list>div{display:grid;grid-template-columns:minmax(190px,.38fr) minmax(0,1fr);gap:22px;padding:14px 0;border-bottom:1px solid var(--line)}
+.home-evidence-list dd{margin:0;color:var(--muted);font-size:.94rem;line-height:1.56}
+.material-property-table{max-width:100%;margin:16px 0 12px}
+.material-property-table th:nth-child(1){width:15%}
+.material-property-table th:nth-child(2){width:34%}
+.material-property-table th:nth-child(3){width:25%}
+.material-property-table td{vertical-align:top;line-height:1.5}
+.calculator,.calc-decision-chain,.calc-reference-grid,.calc-decision-grid,.calc-bottom-grid{max-width:var(--measure-reference);margin-inline:auto}
+.calc-decision-chain{margin-top:20px;margin-bottom:20px;padding:0 0 12px;border-bottom:1px solid var(--line)}
+.calc-decision-chain h2{margin-bottom:10px;font-size:1.08rem}
+.calc-decision-chain ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0;padding:0;list-style:none;border:1px solid var(--line)}
+.calc-decision-chain li{display:grid;gap:5px;align-content:start;min-width:0;padding:12px;border-right:1px solid var(--line);background:var(--paper-2)}
+.calc-decision-chain li:last-child{border-right:0}
+.calc-decision-chain strong{color:#7b3218;font:800 .66rem/1.25 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.calc-decision-chain span{font-size:.86rem;line-height:1.45}
+.guide-layout,.reading-layout{max-width:1100px;margin-inline:auto}
+@media(max-width:900px){
+  .hub-decision-panel,.material-data-workflow,.home-reference,.guide-layout,.reading-layout{max-width:none}
+  .workflow-map li{grid-template-columns:42px minmax(0,1fr)}
+  .workflow-next{grid-column:2;padding-left:12px}
+  .calc-decision-chain ol{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .calc-decision-chain li:nth-child(2){border-right:0}
+  .calc-decision-chain li:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media(max-width:620px){
+  .workflow-map li,.home-evidence-list>div{grid-template-columns:1fr;gap:7px}
+  .workflow-step{width:42px}
+  .workflow-next{grid-column:auto;padding-left:10px}
+  .calc-decision-chain ol{grid-template-columns:1fr}
+  .calc-decision-chain li,.calc-decision-chain li:nth-child(2){border-right:0;border-bottom:1px solid var(--line)}
+  .calc-decision-chain li:last-child{border-bottom:0}
+  .material-property-table,.material-property-table tbody,.material-property-table tr,.material-property-table td{display:block;width:100%}
+  .material-property-table thead{display:none}
+  .material-property-table tr{padding:12px 0;border-bottom:1px solid var(--line)}
+  .material-property-table td{padding:4px 0;border:0}
+  .material-property-table td::before{content:attr(data-label);display:block;margin-bottom:2px;color:#7b3218;font:800 .61rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+}

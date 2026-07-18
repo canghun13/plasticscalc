@@ -62,7 +62,8 @@ const calculators = {
 for (const [id, content] of Object.entries(calculators)) {
   const path = `tools/injection-molding/${id}.html`;
   let html = readFileSync(path, 'utf8');
-  html = html.replace(/<h2>Use this[\s\S]*?<h2>Interpretation, assumptions, and limitations<\/h2>/, `${content.sections}<h2>Interpretation, assumptions, and limitations</h2>`);
+  const valueSections = content.sections.replaceAll('<h2>', '<h2 class="value-heading">');
+  html = html.replace(/<h2>Use this[\s\S]*?<h2>Interpretation, assumptions, and limitations<\/h2>/, `${valueSections}<h2>Interpretation, assumptions, and limitations</h2>`);
   html = html.replace(/<h2>FAQ<\/h2>[\s\S]*?<h2>Related calculators<\/h2>/, `${content.faq}<h2>Related calculators</h2>`);
   writeFileSync(path, html);
 }

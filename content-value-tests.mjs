@@ -9,8 +9,11 @@ const failures = [];
 for (const file of calculators) {
   const html = read(join('tools/injection-molding', file));
   const headings = [...html.matchAll(/<section class="decision-block[^>]*"><h2>([^<]+)<\/h2>/g)].map(match => match[1]);
+  const referenceHeadings = [...html.matchAll(/<section class="reference-block[^>]*"><h2>([^<]+)<\/h2>/g)].map(match => match[1]);
   if (headings.length !== 4) failures.push(`${file}: expected four decision blocks`);
   if (new Set(headings.slice(0, 3)).size !== 3) failures.push(`${file}: decision blocks are not distinct`);
+  if (headings.slice(0, 3).some(heading => ['Formula and method', 'Inputs and units', 'Worked example'].includes(heading))) failures.push(`${file}: reference content leaked into decision blocks`);
+  if (referenceHeadings.join('|') !== 'Formula and method|Inputs and units|Worked example') failures.push(`${file}: reference block structure is incomplete`);
   if (/Can I use this as a final production setting\?|Use this when|What changes the result most/.test(html)) failures.push(`${file}: retained generic calculator filler`);
   if (!/<h2>FAQ<\/h2><h3>/.test(html)) failures.push(`${file}: missing specific FAQ`);
 }

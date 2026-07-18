@@ -488,6 +488,7 @@ Add new entries at the top.
 - Production deployment verification after commit `0217347`: the public Mold Shrinkage page and shared calculator script served the corrected `part ÷ (1 − shrinkage)` formula, the 101.52 mm worked example, and the corrected runtime expression. GitHub Pages propagation is complete.
 - Added explicit `noindex,follow` on `404.html`; 404 remains excluded from sitemap. The expanded verifier now asserts this condition alongside canonical, sitemap, robots, CNAME, GA4, and local-link checks.
 - Materials hub quality update: added two grade-specific solid-density references for Resin Weight context—BASF Ultramid B3S Q661 (PA6, 1.13 g/cm³) and Ultradur B 4300 G6 HR (PBT-GF30, 1.51 g/cm³), both ISO 1183 basis. Each source is linked and the page distinguishes solid density from melt density. No automatic Shot Volume preset was added because that calculator needs melt density at process conditions, not these solid-density values.
+- Production HTTP audit after commit `703296c`: all 26 sitemap URLs returned HTTP 200, served their own self-canonical URL, and referenced the shared GA4 loader exactly once. No public deployment issues were found.
 - Next priority: use real material-grade documentation to introduce carefully scoped material presets only where the data source, temperature basis, and limitations can be shown. Then add browser-level interaction tests and review GA4 Realtime/consent requirements before broader SEO expansion.
 
 ### Open issues / next actions

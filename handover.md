@@ -499,6 +499,7 @@ Add new entries at the top.
 - Validation after the remediation pass: 27 HTML files, 26 indexable/self-canonical sitemap URLs, no broken local absolute links, no detected non-ASCII corruption in generated HTML, and all 14 calculator regression tests passed.
 - Hub and guide enrichment pass: expanded Tools, Injection Molding, Materials, and Guides hubs with decision workflows, scope boundaries, selection guidance, related reference paths, and practical callouts. Added operational FAQ sections to all four existing guides. `enrich-site-pages.mjs` preserves this content across future static builds.
 - Re-ran generation, verifier, calculator regression tests, non-ASCII scan, and diff check successfully; no new public URLs were introduced.
+- Production verification after commit `0dd882e`: the public homepage workflow, calculator-specific operational content, guide FAQs, and Injection Molding hub workflow all served correctly. The only non-ASCII characters returned by the browser were normal rendered engineering and typography symbols (for example ×, ÷, π, degree, superscript, dash, and copyright), not encoding corruption.
 - Next priority: use real material-grade documentation to introduce carefully scoped material presets only where the data source, temperature basis, and limitations can be shown. Then add browser-level interaction tests and review GA4 Realtime/consent requirements before broader SEO expansion.
 
 ### Open issues / next actions

@@ -531,3 +531,14 @@ When an AI coding agent receives this repository:
 - Do not change canonical strategy or URL structure casually.
 - Do not claim a task is complete unless the code is actually implemented and tested.
 - Before ending the session, update this document with exact completed work and the next actionable step.
+
+---
+
+### 2026-07-18 Markup integrity remediation
+
+- Investigated the deployed Materials-page symptom `resin-weight.html">Resin Weight Calculator` as a shared generation issue, not a one-off content typo.
+- Root cause: `build-pages.mjs` built the Materials card grid by applying a substring regex to the already-rendered combined `links` HTML. Each match began at the slug inside an `href` value, so it discarded the opening `<article>`, `<h3>`, and `<a href="...` markup. This affected exactly two cards in `tools/materials/index.html`: Resin Weight Calculator and Material Cost Per Part Calculator.
+- Replaced that regex extraction with `materialLinks`, generated directly from the two matching `toolData` records using the same complete-card template as the main tools hub. This removes the fragile HTML-string parsing path.
+- Added `markup-tests.mjs` and ran it against all 27 generated HTML files. It fails on visible `.html">` or attribute-like fragments, unclosed/nested anchors, unquoted or missing anchor href values, duplicate IDs, and replacement-character encoding errors. The final run passed.
+- Regenerated every public HTML page and re-ran `verify.mjs` (27 HTML files, 26 indexable pages, unique metadata/canonicals, sitemap and link checks), `calculator-tests.mjs` (14/14 calculators), `consent-tests.mjs`, and `git diff --check`; all passed.
+- Next action: after the commit is deployed, cache-bypass fetch `https://plasticscalc.com/tools/materials/` and verify that both calculator cards render as complete anchors and that no href fragment appears in visible page text.

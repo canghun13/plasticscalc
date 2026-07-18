@@ -543,3 +543,18 @@ When an AI coding agent receives this repository:
 - Regenerated every public HTML page and re-ran `verify.mjs` (27 HTML files, 26 indexable pages, unique metadata/canonicals, sitemap and link checks), `calculator-tests.mjs` (14/14 calculators), `consent-tests.mjs`, and `git diff --check`; all passed.
 - Next action: after the commit is deployed, cache-bypass fetch `https://plasticscalc.com/tools/materials/` and verify that both calculator cards render as complete anchors and that no href fragment appears in visible page text.
 - Deployment verification after commit `cb0c759`: cache-bypassed `https://plasticscalc.com/tools/materials/` returned HTTP 200 with both expected full anchors. Its visible text contained neither `resin-weight.html` nor attribute-like `href=`/`src=` fragments.
+
+---
+
+### 2026-07-18 PlasticsCalc visual identity system
+
+- Rebuilt the shared visual system specifically for PlasticsCalc as an industrial engineering-reference workstation. The implementation remains static, image-light, and mobile-first; no generic landing-page template or external design dependency was added.
+- Differentiation from the prior shared template: removed the soft teal/blue palette, repeated rounded cards, pill-like controls, centered generic CTA hero, and uniform three-column section rhythm. The new palette uses carbon, warm paper, safety orange, and material-reference lime; radius is zero throughout primary UI.
+- Header is now a compact reference-desk masthead with a PC maker's mark, an engineering-reference subtitle, and uppercase tool-index/process/material/field-guide navigation. Footer is split into an engineering-reference statement and compliance/method block rather than a generic link row.
+- Homepage is now a workstation composition: a gridded process-question hero with an INPUT -> ESTIMATE -> VERIFY readout; a three-step Geometry/Thermal/Economics process rail; a constraint-led core-tool index; and a compact technical-handoff strip. It no longer uses the previous hero + CTA + repeated card-grid sequence.
+- Tool cards now form square-edged, dense reference tiles with category labels and calibration bars instead of floating rounded cards. Generic category, materials, guide, and about pages inherit the same editorial data-panel system.
+- Calculator pages use a bordered two-panel work area: a parameter form on a paper field beside a carbon estimate-output panel, with monospace unit labels, technical result labeling, square controls, and responsive single-column fallback. Formula blocks, technical notes, and material-reference tables were restyled as distinct engineering artifacts.
+- Added responsive rules for the masthead, workstation hero, process rail, tool index, calculator form, and footer; narrow screens collapse intentionally to one-column work flow rather than retaining a compressed card grid.
+- Updated the SVG favicon to use the same carbon/orange/lime PlasticsCalc signal system.
+- Validation after redesign: generated all 27 HTML pages; `markup-tests.mjs`, `verify.mjs`, `calculator-tests.mjs`, `consent-tests.mjs`, JavaScript syntax checks, and `git diff --check` passed. SEO URLs, canonicals, page content, and calculator formulas were not changed.
+- Next priority: after deployment, verify the production homepage, one calculator, and the Materials table at desktop and mobile widths; retain this visual system for any new tool or guide instead of reintroducing rounded generic-card patterns.

@@ -430,6 +430,25 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-07-18 — Foundation and initial calculator release
+
+- Reviewed `README.md`, this handover, Git status, origin remote, `main` branch, and CNAME (`plasticscalc.com`) before implementation.
+- Competitive/search-intent review: calculator SERPs are populated by simple single-purpose tools. Useful opportunities are transparent assumptions, linked sizing/process/cost workflow, static crawlable explanatory pages, and tools for capacity, scrap, utilization and amortization—not only clamp/shot inputs. References reviewed included KEYENCE injection-molding formulas, MIT course material on clamp force, BASF cooling-time material, and current industry calculator implementations.
+- Built static shared design system in `assets/css/site.css`; created technical, responsive header, navigation, footer, breadcrumbs, cards, formula and result layouts.
+- Added homepage, tools hub, injection molding category, materials expansion category, guides structure, about, privacy, disclaimer and 404 page.
+- Implemented 14 working calculators using the shared `assets/js/calculators.js` configuration: clamp tonnage, shot size, shot volume, projected area, cycle time, cooling time, parts/hour, cavity count, mold shrinkage, resin weight, material cost per part, scrap rate, machine utilization, and mold amortization.
+- Every calculator has a self-canonical static URL, unique title/description/H1, Open Graph basics, SoftwareApplication schema, calculator UI, formula/method, inputs, worked-example guidance, limitations, FAQ, and related tools.
+- Formula approach: clamp force is projected area × estimated cavity pressure × safety factor; shot mass aggregates parts/runner/cushion; volume/mass use density; cycle is phase sum; cooling uses the standard one-dimensional flat-wall Fourier-style estimate; output/cavity calculations use available time; cost and production calculations use explicit input assumptions. All tools warn that results are estimates and require validation using material/machine/mold data and trials.
+- Added GA4 once globally through `assets/js/site.js` using `G-4HCMML5ENX`; localhost is excluded. Added `robots.txt`, `sitemap.xml`, `llms.txt`, and basic SVG favicon. `CNAME` was preserved.
+- `build-pages.mjs` is the static-page generator. It is a development helper only; generated HTML is committed for GitHub Pages crawlability.
+
+### Open issues / next actions
+
+1. Configure GitHub Pages to deploy `main` root and verify Cloudflare DNS/HTTPS plus live GA4 in production.
+2. Validate formulas against material-specific supplier data sheets and add cited long-form guides (especially cooling, shrinkage, pressure and machine capacity) before expanding calculator count.
+3. Add a consent solution if legally required for target visitor jurisdictions before relying on GA4 cookies.
+4. Add automated link/metadata and calculator test scripts when a standard local runtime/toolchain is adopted.
+
 ### Baseline — Project Initialization
 
 - PlasticsCalc niche selected.

@@ -1,0 +1,6 @@
+# PlasticsCalc
+> Free practical calculators and references for plastics processing, beginning with injection molding.
+
+Primary tools: https://plasticscalc.com/tools/injection-molding/
+Guides: https://plasticscalc.com/guides/
+Engineering disclaimer: https://plasticscalc.com/disclaimer.html

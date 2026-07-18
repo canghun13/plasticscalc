@@ -75,3 +75,18 @@
   .guide-protocol-steps p{padding:15px 16px;border-right:0;border-bottom:1px solid var(--line)}
   .guide-protocol-steps p:last-child{border-bottom:0}
 }
+
+/* Value-audit content: compact decision evidence instead of generic hub filler. */
+.hub-decision-panel,.material-data-workflow{border-block:1px solid var(--line);background:var(--paper-2)}
+.hub-decision-panel>div:first-child,.material-data-workflow>div:first-child{max-width:900px;margin-bottom:17px}
+.hub-decision-panel h2,.material-data-workflow h2{margin:.1rem 0 .55rem;font-size:1.34rem}
+.hub-intro{max-width:820px;margin:0;color:var(--muted)}
+.hub-decision-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.hub-decision-grid article{min-width:0;padding:16px;border:1px solid var(--line);background:var(--white)}
+.hub-decision-grid strong{display:block;margin-bottom:8px;color:#7b3218;font:800 .69rem/1.2 var(--mono);letter-spacing:.07em;text-transform:uppercase}
+.hub-decision-grid p{margin:0;font-size:.9rem;line-height:1.52}
+.hub-decision-panel>.small,.material-data-workflow>.small{margin:14px 0 0}
+.material-data-workflow{background:#e2e6d7}
+.material-data-workflow .hub-decision-grid article{background:#fffdf7}
+@media(max-width:900px){.hub-decision-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.hub-decision-grid{grid-template-columns:1fr}.hub-decision-panel,.material-data-workflow{padding-top:28px;padding-bottom:28px}}

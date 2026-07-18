@@ -430,6 +430,16 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-07-18 — Content & Value Audit (people-first and AdSense-readiness)
+
+- Scope audited: 28 public HTML files (27 indexable): homepage; Tools, Injection Molding, Materials, and Guides hubs; all 14 calculators; four guides; About; Contact; Privacy; Disclaimer; and 404. The audit used rendered-page review, source review, calculator behavior checks, internal-link/metadata checks, and current official Google guidance rather than an approval prediction.
+- Official criteria consulted: Google Search Central’s people-first guidance (original, satisfying, focused, well-sourced content); Google Search spam policy on scaled content abuse; Google AdSense guidance on unique/relevant content, clear navigation, transparency, and site-wide review. Approval is not guaranteed by these changes.
+- Audit finding: 18 pages had a thin/repetitive-content risk despite having working functionality—14 calculators reused the same operational headings and FAQ, three hubs relied on generic “choose/before using” messaging, and About did not yet make the maintenance/correction method concrete. Homepage, four focused guides, Contact, Privacy, Disclaimer, and 404 were retained because they already serve distinct visitor, transparency, or navigational purposes.
+- Direct remediation: all 14 calculator pages now replace generic operational copy and identical FAQs with tool-specific input-source, next-decision, sanity-check, and failure-boundary content. No calculator URL or formula was added or changed. Examples: shot tools now distinguish measured shot records from machine rating basis; cycle/output tools distinguish gross output from uptime/yield; shrinkage and resin-weight tools specify grade/direction/solid-vs-melt evidence; cost tools define their accounting boundary.
+- Hub remediation: Tools and Injection Molding now present decision evidence and cross-checks rather than generic calls to choose a tool. Materials now documents a constrained data-selection workflow for solid versus melt density, filled/conditioned grades, and cost inputs, while retaining only cited grade-specific density examples instead of expanding an unsupported generic table.
+- Trust remediation: About now states the published calculation lifecycle, limits, correction path, and absence of machine-maker/qualification claims. Contact remains the route for traceable technical correction suggestions.
+- Added `content-value-tests.mjs` to enforce distinct calculator decision blocks and FAQs, absence of the removed generic calculator filler, concrete hub evidence, Materials data workflow, and method transparency after every static rebuild. Automated content, markup, metadata/link, calculator, calculator-UI, consent, and JavaScript checks pass before deployment; production render verification follows this content release.
+
 ### 2026-07-18 — Layout density and information-hierarchy calibration
 
 - Guides hub refinement: removed the oversized, repetitive “How to use a guide with a calculator” wash panel and its nested technical-note box. It is now a compact `Reference protocol` strip with Calculate / Check / Validate steps, preserving the engineering-use boundary without duplicating the guide cards or leaving a large low-information panel.

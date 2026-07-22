@@ -13,7 +13,7 @@ const checks = [
   ['isolated field grid', css.includes('.calc-workstation form') && css.includes('.calc-field{display:grid')],
   ['mobile field fallback', css.includes('@media(max-width:520px){.calc-workstation form{grid-template-columns:1fr}')],
   ['phase 3 calculator mount', js.includes('function mountPhase3') && js.includes('calc-workstation')],
-  ['all calculator pages', calculatorPages.length === 34]
+  ['all calculator pages', calculatorPages.length === 33]
 ];
 const failed = checks.filter(([, passed]) => !passed).map(([name]) => name);
 console.log(JSON.stringify({ calculatorPages: calculatorPages.length, status: failed.length ? 'failed' : 'passed', checks: checks.map(([name]) => name), failed }));

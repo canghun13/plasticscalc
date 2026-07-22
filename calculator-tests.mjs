@@ -1,6 +1,6 @@
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-const source=`${readFileSync('assets/js/calculators.js','utf8')}\nglobalThis.__tools=tools;`;
+const source=`${readFileSync('assets/js/calculators.js','utf8')}\n${readFileSync('assets/js/phase3-calculators.js','utf8')}\nglobalThis.__tools=tools;globalThis.__phase3Tools=phase3Tools;`;
 const context={document:{addEventListener(){},querySelector(){return null}},Intl,console};vm.createContext(context);vm.runInContext(source,context);
 const near=(actual,expected,name)=>{if(Math.abs(actual-expected)>1e-8)throw Error(`${name}: expected ${expected}, received ${actual}`)};
 const t=context.__tools;
@@ -18,4 +18,13 @@ near(t['material-cost'].calc({part:45,runner:12,cavities:2,price:2.4,scrap:3}).v
 near(t['scrap-rate'].calc({good:9700,scrap:300}).value,3,'scrap rate');
 near(t['machine-utilization'].calc({scheduled:480,downtime:55,planned:20}).value,84.375,'machine utilization');
 near(t['mold-amortization'].calc({tooling:85000,life:500000,maintenance:10000}).value,.19,'mold amortization');
-console.log({calculatorTests:Object.keys(t).length,status:'passed'});
+const p=context.__phase3Tools;
+near(p['runner-volume'].c({diameter:6,length:800}).v,Math.PI*36*800/4/1000,'runner volume');
+near(p['sprue-volume'].c({large:12,small:6,height:70}).v,Math.PI*70*(144+72+36)/12/1000,'sprue volume');
+near(p['screw-stroke'].c({volume:220,diameter:50}).v,220/(Math.PI*2500/4/1000),'screw stroke');
+near(p['injection-unit-utilization'].c({shot:180,capacity:240}).v,75,'injection utilization');
+near(p['residence-time'].c({barrel:1.2,shot:180,cycle:30}).v,1.2/(.18*2),'residence time');
+near(p['parts-per-shift'].c({minutes:480,cycle:30,cavities:4,uptime:90,scrap:3}).v,480*60/30*4*.9*.97,'parts per shift');
+near(p['oee-capacity'].c({minutes:480,cycle:30,cavities:4,availability:85,performance:95,quality:97}).v,480*60/30*4*.85*.95*.97,'oee capacity');
+near(p['break-even-volume'].c({fixed:80000,price:3.2,variable:2}).v,80000/1.2,'break even');
+console.log({calculatorTests:Object.keys(t).length+Object.keys(p).length,status:'passed'});

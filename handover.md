@@ -430,6 +430,14 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-07-26 — Calculator registry and worked-example audit
+
+- Reverified the actual `main` source and live browser behavior after a prior audit used a stale cached HTML response. All 33 Calculator pages have a matching `data-calculator` entry: 14 in `assets/js/calculators.js` and 19 in `assets/js/phase3-calculators.js`. Phase 3 pages load their second registry explicitly, so the reported 19 missing calculators were a false positive, not an implementation gap.
+- Added `calculator-registry-tests.mjs`. It requires exactly 33 calculator pages and registry entries, rejects duplicate or orphaned IDs, verifies each page loads the owning registry script, smoke-tests every default calculation for a finite unit-bearing result, and checks that the worked example contains the same rounded default result.
+- Corrected four worked-example mismatches discovered by that test: Break-Even Volume (66,666.67 parts), Sprue Volume (4.62 cm3), Parts Per Shift (3,352.32 good parts), and OEE Capacity (3,007.78 parts). Updated both `phase3-pages.mjs` and the generated Calculator HTML so later generation retains the correction.
+- Browser smoke test against the current source: 33/33 calculators rendered one form with a finite default result and no console errors. Live production Runner Volume also rendered its Phase 3 form and the 22.62 cm³ default result, confirming the stale-response audit was not representative of the deployed page.
+- Mandatory Quality Gate: [x] automated checks passed (content, markup, metadata/link, calculator, registry, calculator UI, consent, and JavaScript syntax); [x] all 33 calculator default forms smoke-tested in a browser; [x] five representative calculators checked at 390 px without overflow; [x] no console errors; [x] handover updated. Remaining blocking issue: none.
+
 ### 2026-07-22 — Phase 3 final audit and consolidation
 
 - Audit scope: rechecked the Phase 3 sitemap, public-file inventory, commit history, 20 originally added calculators, nine added guides, hub linkage, calculator runtime, metadata, markup, and the owner-approved layout boundary. No new public page was added.

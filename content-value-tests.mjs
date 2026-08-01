@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 const read = file => readFileSync(file, 'utf8');
 const calculators = readdirSync('tools/injection-molding')
-  .filter(file => file.endsWith('.html') && file !== 'index.html');
+  .filter(file => file.endsWith('.html') && read(join('tools/injection-molding', file)).includes('data-calculator='));
 const failures = [];
 
 for (const file of calculators) {

@@ -430,6 +430,14 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-08-01 — Mold Cooling & Thermal Control cluster
+
+- Started from `12b13e5` with 56 public HTML files, 33 calculators, and 13 guides. Added exactly 10 pages: hub `tools/injection-molding/mold-cooling-thermal-control.html`; six calculators (`cooling-reynolds`, `required-cooling-flow`, `mold-heat-removal`, `cooling-water-rise`, `injection-chiller-size`, `cooling-circuit-balance`); and three guides for turbulent flow, series/parallel circuits, and measurement validation.
+- Added `assets/js/thermal-calculators.js` and extended registry verification for all 39 calculator pages. The six tools use Reynolds/flow rearrangement, mass-flow energy balance, coolant ΔT, single-base-load chiller sizing, and measured-circuit comparison. Chiller base load explicitly accepts one chosen estimate, never polymer and measured circuit loads added together.
+- Default water inputs approximate 20°C water; glycol and other temperatures require supplier-verified manual density, viscosity and specific heat rather than unsupported extrapolation. SmartFlow is cited for the conditional 4,000–8,000 mold-cooling reference and diminishing benefit; Conair for plastics process load/chiller scope; Dow for glycol-property context.
+- Independent regression coverage: 31 thermal arithmetic cases (five Reynolds, five required-flow, four heat-removal, five water-rise, four chiller, eight circuit-comparison cases) plus finite-default tests. Worked examples were corrected to match the shared result rounding.
+- New pages link Cooling Time → heat removal → flow → Reynolds → water rise → chiller → circuit comparison → measurement validation. Cooling Time, Tools and Injection Molding hubs link back to the cluster. No global CSS, existing calculator formulas, header/footer, or owner-managed badge area changed.
+
 ### 2026-07-26 — Calculator registry and worked-example audit
 
 - Reverified the actual `main` source and live browser behavior after a prior audit used a stale cached HTML response. All 33 Calculator pages have a matching `data-calculator` entry: 14 in `assets/js/calculators.js` and 19 in `assets/js/phase3-calculators.js`. Phase 3 pages load their second registry explicitly, so the reported 19 missing calculators were a false positive, not an implementation gap.

@@ -1,0 +1,10 @@
+import {readFileSync} from'node:fs';import vm from'node:vm';
+const c={document:{addEventListener(){},querySelector(){return null}},Intl};vm.createContext(c);vm.runInContext(`${readFileSync('assets/js/thermal-calculators.js','utf8')}\nglobalThis.t=thermalTools`,c);const t=c.t,near=(a,b,n)=>{if(Math.abs(a-b)>1e-7)throw Error(`${n}: ${a} !== ${b}`)};
+const run=(id,values,expected)=>near(t[id].c(values).v,expected,id);
+for(const flow of [1,2,4,8,16])run('cooling-reynolds',{diameter:8,flow,density:998,viscosity:1.002},998*(flow/60000/(Math.PI*.008**2/4))*.008/.001002);
+for(const re of [2300,4000,6000,8000,12000])run('required-cooling-flow',{target:re,diameter:8,density:998,viscosity:1.002},re*.001002*Math.PI*.008/(4*998)*60000);
+for(const e of [200,300,450,600])run('mold-heat-removal',{shot:120,cycle:30,energy:e},.12/30*e);
+for(const q of [2,6,12,24,48])run('cooling-water-rise',{load:q,flow:12,density:998,cp:4.18,inlet:20},q/(12/60000*998*4.18));
+for(const base of [5,10,15,20])run('injection-chiller-size',{base,aux:2,margin:15},(base+2)*1.15);
+for(const rise of [.5,1,2,4,8,12,16,20])run('cooling-circuit-balance',{diameter:8,flow:8,density:998,viscosity:1.002,cp:4.18,delta:rise},998*(8/60000/(Math.PI*.008**2/4))*.008/.001002);
+for(const [id,v]of Object.entries(t)){const x=Object.fromEntries(v.i.map(([k,,d])=>[k,d]));if(!Number.isFinite(v.c(x).v))throw Error(`${id} default non-finite`)}console.log(JSON.stringify({thermalCases:31,status:'passed'}));

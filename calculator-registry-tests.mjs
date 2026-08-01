@@ -5,16 +5,18 @@ import vm from 'node:vm';
 const calculatorDirectory = 'tools/injection-molding';
 const registryFiles = {
   tools: 'assets/js/calculators.js',
-  phase3Tools: 'assets/js/phase3-calculators.js'
+  phase3Tools: 'assets/js/phase3-calculators.js',
+  thermalTools: 'assets/js/thermal-calculators.js'
 };
-const source = `${readFileSync(registryFiles.tools, 'utf8')}\n${readFileSync(registryFiles.phase3Tools, 'utf8')}\nglobalThis.__tools = tools; globalThis.__phase3Tools = phase3Tools;`;
+const source = `${readFileSync(registryFiles.tools, 'utf8')}\n${readFileSync(registryFiles.phase3Tools, 'utf8')}\n${readFileSync(registryFiles.thermalTools, 'utf8')}\nglobalThis.__tools = tools; globalThis.__phase3Tools = phase3Tools; globalThis.__thermalTools = thermalTools;`;
 const context = { document: { addEventListener() {}, querySelector() { return null; } }, Intl };
 vm.createContext(context);
 vm.runInContext(source, context);
 
 const registries = [
   { name: 'tools', entries: context.__tools, script: '/assets/js/calculators.js', inputs: 'inputs', calculate: 'calc', value: 'value', unit: 'unit' },
-  { name: 'phase3Tools', entries: context.__phase3Tools, script: '/assets/js/phase3-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' }
+  { name: 'phase3Tools', entries: context.__phase3Tools, script: '/assets/js/phase3-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' },
+  { name: 'thermalTools', entries: context.__thermalTools, script: '/assets/js/thermal-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' }
 ];
 const registryById = new Map();
 for (const registry of registries) {
@@ -25,9 +27,9 @@ for (const registry of registries) {
 }
 
 const calculatorPages = readdirSync(calculatorDirectory)
-  .filter(file => file.endsWith('.html') && file !== 'index.html')
+  .filter(file => file.endsWith('.html') && readFileSync(join(calculatorDirectory,file),'utf8').includes('data-calculator='))
   .sort();
-if (calculatorPages.length !== 33) throw Error(`Expected 33 calculator pages, found ${calculatorPages.length}`);
+if (calculatorPages.length !== 39) throw Error(`Expected 39 calculator pages, found ${calculatorPages.length}`);
 
 const format = value => new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(value);
 const workedExampleFailures = [];

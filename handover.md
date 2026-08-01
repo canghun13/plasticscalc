@@ -430,6 +430,13 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-08-01 — Mold Cooling browser QA completion
+
+- QA baseline: `1122208b6cdd8be6964f246ae2111db3f4c810a2`. Browser-rendered the ten Mold Cooling & Thermal Control pages at 1440, 1280, 1024, 768 and 390 px (50 checks), and Cooling Time, Tools hub, Injection Molding hub and homepage at 1440, 768 and 390 px (12 checks).
+- All checked pages had one H1, header/footer, correct self-canonical, no horizontal overflow, no header/H1 overlap and no clipped calculator input. No console errors were recorded. The owner-managed directory-badge area was not modified.
+- Browser interaction check passed for all six new calculators: initial form/default result, changed input recalculation, negative-value rejection without NaN/Infinity, result unit/detail, and Reset restoration. Zero heat/load values remain valid physical zero-load cases; negative values are rejected. The present implementation has no separate Heat-Removal mode switch, Water-Rise measurement mode, or dynamic multi-circuit add/remove UI, so those requested conditional checks were not applicable to this committed scope.
+- Re-ran thermal arithmetic, existing calculator, registry, UI, content, markup, metadata/link, consent and JavaScript syntax checks after QA. No blocking issue remains from this QA pass; no source/UI correction was needed.
+
 ### 2026-08-01 — Mold Cooling & Thermal Control cluster
 
 - Started from `12b13e5` with 56 public HTML files, 33 calculators, and 13 guides. Added exactly 10 pages: hub `tools/injection-molding/mold-cooling-thermal-control.html`; six calculators (`cooling-reynolds`, `required-cooling-flow`, `mold-heat-removal`, `cooling-water-rise`, `injection-chiller-size`, `cooling-circuit-balance`); and three guides for turbulent flow, series/parallel circuits, and measurement validation.

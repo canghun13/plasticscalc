@@ -206,3 +206,4 @@
   .materials-tool-cards .grid{grid-template-columns:1fr}
   .materials-reference-area{margin-top:20px}
 }
+@media(max-width:800px){.site-header .top{grid-template-columns:1fr auto;gap:12px;padding:15px 0}.menu-toggle{justify-self:end;display:inline-flex;min-height:44px;padding:10px 13px}.site-header .nav{grid-column:1/-1;justify-self:stretch;display:grid;gap:0;border-top:1px solid #53605a}.site-header .nav a{padding:15px 2px;border-bottom:1px solid #53605a}.site-header .nav[hidden]{display:none}}@media(min-width:801px){.menu-toggle{display:none}}

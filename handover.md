@@ -430,6 +430,15 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-08-01 Mobile header navigation
+
+- Start commit: `7575b995c0f14411905eb1465b55892e1d65e40a`. Replaced only the mobile wrapping primary navigation with an initially closed MENU button and retained the desktop navigation, URLs, order, footer, consent UI, and owner-managed badge area.
+- The existing 800px mobile breakpoint is used. MENU is a real accessible button with `aria-expanded` and `aria-controls`; it opens below the brand and closes on toggle, link choice, Escape, outside click, and desktop resize. The menu remains normal links if JavaScript is unavailable.
+- Changed files: all 66 published HTML headers, `build-pages.mjs`, `phase3-pages.mjs`, `thermal-pages.mjs`, scoped header rules in `assets/css/site.css`, `assets/js/site.js`, `mobile-header-tests.mjs`, and this handover. Desktop header markup and rendering are unchanged; the footer-below owner-managed directory badge was not modified.
+- Automated checks passed: `mobile-header-tests.mjs` (66/66 header markup, unique primary-navigation ID, unchanged link order/URLs and behavior hooks), JavaScript syntax, markup checks, sitemap/canonical verification, 33 legacy calculator arithmetic tests, 39 calculator registry/UI tests, 45 thermal tests, and consent tests.
+- Browser QA passed at 1440, 1280, 1024, 768, and 390px for Homepage, Tools index, Injection Molding hub, Materials hub, Field Guides hub, Method, Contact, Clamp Tonnage Calculator, Mold Heat Removal Calculator, and Cooling Time Estimates guide (50 renders). At mobile widths MENU was closed by default; desktop kept the original horizontal navigation and hid MENU. Verified toggle, Escape, outside click, exact menu-link navigation/close, and desktop-to-mobile resize reset. The 390px screenshot was inspected.
+- Browser findings: console errors 0; horizontal overflow 0; header/H1 overlap 0; H1 or menu-text clipping 0; no footer or owner-managed badge regression. No HIGH/MEDIUM issues remain; operationally ready after commit/push synchronization.
+
 ### 2026-08-01 Mold Heat Removal and Circuit Balance completion
 
 - QA baseline: `53408d02706400dbbce50ff4337b1cb6a8eaa745`. Replaced the two previously missing interaction models without adding pages, calculators, presets, or global CSS changes. The owner-managed directory-badge area below the footer was not touched.

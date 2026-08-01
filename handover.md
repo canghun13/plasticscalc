@@ -430,6 +430,14 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-08-01 Mold Heat Removal and Circuit Balance completion
+
+- QA baseline: `53408d02706400dbbce50ff4337b1cb6a8eaa745`. Replaced the two previously missing interaction models without adding pages, calculators, presets, or global CSS changes. The owner-managed directory-badge area below the footer was not touched.
+- Mold Heat Removal now has separate Enthalpy and Simplified specific-heat modes. Each mode displays only its relevant inputs, recalculates immediately on mode selection, reports its selected method with processed mass, kW, BTU/h and refrigeration tons, and restores the Enthalpy defaults on Reset. The simplified-method output states its constant-Cp and crystallization/phase-change limitations.
+- Cooling Circuit Balance now starts with two circuits and supports additive multi-circuit comparison, middle/last deletion, a protected two-circuit minimum, editable circuit labels, Reset, per-circuit velocity/Re/regime/delta-T/heat-removal output, median-relative deviations, and potential-only imbalance wording with field-measurement and zone-load validation guidance.
+- Automated validation: `thermal-calculator-tests.mjs` expanded to 45 thermal arithmetic/state cases (both Heat modes, hidden-input independence, default/add/remove/minimum/reset circuit states, varying circuit geometry/flow/delta-T, potential status, and finite result checks). `calculator-registry-tests.mjs`, `calculator-ui-tests.mjs`, `calculator-tests.mjs` (33), `markup-tests.mjs`, `verify.mjs`, `consent-tests.mjs`, JavaScript syntax validation, and `git diff --check` all passed.
+- Browser QA on the local server: Mold Heat Removal and Cooling Circuit Balance rendered at 1440, 1280, 1024, 768, and 390 px (10 viewport checks); Cooling Time and Mold Cooling & Thermal Control hub rendered at 1440 and 390 px (4 checks). All had H1/footer, no horizontal overflow, and contained visible controls/results. The two locally served pages retain production canonical URLs by design, so local URL equality is not expected. Heat mode switching/reset and Balance add/add/delete-middle/minimum-protection/reset were executed in-browser at mobile width. Console errors, visible overlap, and visible clipping: 0. No HIGH or MEDIUM issue remains.
+
 ### 2026-08-01 — Mold Cooling browser QA completion
 
 - QA baseline: `1122208b6cdd8be6964f246ae2111db3f4c810a2`. Browser-rendered the ten Mold Cooling & Thermal Control pages at 1440, 1280, 1024, 768 and 390 px (50 checks), and Cooling Time, Tools hub, Injection Molding hub and homepage at 1440, 768 and 390 px (12 checks).

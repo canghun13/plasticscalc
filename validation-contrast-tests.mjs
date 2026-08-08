@@ -1,0 +1,14 @@
+import assert from'node:assert/strict';
+import {readFileSync}from'node:fs';
+const css=readFileSync('assets/css/site.css','utf8');
+const hex=name=>css.match(new RegExp(`--${name}:(#[0-9a-fA-F]{6})`))?.[1];
+const rgb=value=>value.match(/[0-9a-f]{2}/gi).map(x=>parseInt(x,16));
+const luminance=value=>rgb(value).map(x=>{x/=255;return x<=.04045?x/12.92:((x+.055)/1.055)**2.4}).reduce((sum,x,index)=>sum+x*[.2126,.7152,.0722][index],0);
+const ratio=(foreground,background)=>{const a=luminance(foreground),b=luminance(background);return(Math.max(a,b)+.05)/(Math.min(a,b)+.05)};
+assert.match(css,/\.validation-table tbody td\{color:var\(--ink\)\}/,'Validation table body must explicitly use the dark ink foreground.');
+const ink=hex('ink'),white=hex('white');
+assert.ok(ink&&white,'Required validation-table color variables must exist.');
+const whiteRatio=ratio(ink,white),alternateRatio=ratio(ink,'#f6f5ef');
+assert.ok(whiteRatio>=7,`Validation table white-row contrast ${whiteRatio.toFixed(2)}:1 is below 7:1.`);
+assert.ok(alternateRatio>=7,`Validation table alternate-row contrast ${alternateRatio.toFixed(2)}:1 is below 7:1.`);
+console.log(JSON.stringify({status:'passed',whiteRowContrast:Number(whiteRatio.toFixed(2)),alternateRowContrast:Number(alternateRatio.toFixed(2)),minimumRequired:7}));

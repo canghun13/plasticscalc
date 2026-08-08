@@ -430,6 +430,18 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-08-08 — Process Validation result-table contrast regression fix
+
+- QA baseline: `545e2899e927bed644cbffc094207b71b9c520d1` on `main`, synchronized with `origin/main`; repository path `C:\Users\cangh\OneDrive\문서\plasticscalc-source`.
+- Symptom and cause: four Process Validation calculators rendered light result-table rows with the light foreground inherited from the dark `.calc-result-panel`. The table supplied a light background but no body-cell foreground, producing only 1.18:1 contrast. Header cells were unaffected because they already declared their own dark background and light text.
+- Affected calculators: Relative Viscosity Curve, Cavity Weight Balance, Gate Seal Study, and Pressure Drop Study. Shot Weight Repeatability has no result table, but was included in the complete cluster regression QA and remained readable.
+- Minimal fix: `assets/css/site.css` now sets `color:var(--ink)` only on `.validation-table tbody td`. No global color, spacing, width, header, footer, consent, or directory-badge rule changed. `validation-pages.mjs` advances only the five calculator pages to stylesheet release `20260808-validation-2`; the hub and guides remain on release `validation-1`. The five generated calculator HTML files contain that scoped cache update.
+- Contrast evidence: body cells improved from 1.18:1 to 14.77:1 on white rows and 13.76:1 on alternating rows. Header cells measured 14.88:1; the dark result-panel foreground remained 13.88:1 and result numbers 16.36:1. `validation-contrast-tests.mjs` independently parses the production CSS variables, requires the scoped selector, and enforces at least 7:1 for both body-row backgrounds.
+- Actual browser QA: all five calculators rendered at 1440, 1280, 1024, 768, and 390 px (25 page/viewport renders). All four tables retained their rows, values, headers, and intentional mobile wrapper scrolling; the Pressure Drop table was scrolled to its right edge to confirm the final incremental-drop column remained reachable and readable. Mobile screenshots were visually inspected. Counts: console errors 0, page horizontal overflow 0, H1/header overlap 0, control or content clipping 0, NaN/undefined/Infinity output 0.
+- Existing-calculator regression: Clamp Tonnage, Material Cost, Mold Heat Removal, and Cooling Circuit Balance were rendered at 1440 and 390 px (8 page/viewport renders). All passed with no console error, page overflow, overlap, clipping, or invalid output; the existing mobile header behavior remained intact.
+- Final automatic tests: contrast 2/2 backgrounds passed; validation arithmetic 32/32; registry 44/44; calculator UI 44/44; mobile header 75/75 pages; markup 75/75 pages; site verification 75 HTML / 74 indexable / 74 sitemap with zero issues; legacy calculators 33/33; thermal arithmetic 45/45; consent passed; content-value 44 calculators / 3 hubs passed; pre-expansion audit passed.
+- Modified files: `assets/css/site.css`, `validation-pages.mjs`, the five Process Validation calculator HTML files, `validation-contrast-tests.mjs`, and this handover entry. Remaining HIGH issues: none. Remaining MEDIUM issues: none. Production readiness: yes, after commit/push and local/origin/remote hash synchronization.
+
 ### 2026-08-08 — Process Validation & Stability cluster
 
 - Repository: `C:\Users\cangh\OneDrive\문서\plasticscalc-source`; start commit `7aa000eac7dd6de48069b300ea357544c6463c4f`. Before work: 66 public HTML pages, 39 calculators and 16 guide/reference pages. The tree was clean, `main` matched `origin/main`, and the Cooling/Thermal and mobile-header work was retained.

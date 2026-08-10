@@ -24,6 +24,15 @@ near(p['sprue-volume'].c({large:12,small:6,height:70}).v,Math.PI*70*(144+72+36)/
 near(p['screw-stroke'].c({volume:220,diameter:50}).v,220/(Math.PI*2500/4/1000),'screw stroke');
 near(p['injection-unit-utilization'].c({shot:180,capacity:240}).v,75,'injection utilization');
 near(p['residence-time'].c({barrel:1.2,shot:180,cycle:30}).v,1.2/(.18*2),'residence time');
+const platenEntered=p['platen-fit'].c({moldW:700,moldH:600,platenW:800,platenH:700});
+near(platenEntered.v,87.5,'platen fit as entered');
+if(!platenEntered.d.includes('as entered')||!platenEntered.d.includes('Fits'))throw Error('platen fit should report the entered fitting orientation');
+const platenRotated=p['platen-fit'].c({moldW:750,moldH:650,platenW:700,platenH:800});
+near(platenRotated.v,93.75,'platen fit rotated');
+if(!platenRotated.d.includes('rotated 90°')||!platenRotated.d.includes('Fits'))throw Error('platen fit should report the rotated fitting orientation');
+const platenNoFit=p['platen-fit'].c({moldW:900,moldH:700,platenW:700,platenH:800});
+near(platenNoFit.v,112.5,'platen fit no orientation');
+if(!platenNoFit.d.includes('Does not fit'))throw Error('platen fit should reject a mold that fails both orientations');
 near(p['parts-per-shift'].c({minutes:480,cycle:30,cavities:4,uptime:90,scrap:3}).v,480*60/30*4*.9*.97,'parts per shift');
 near(p['oee-capacity'].c({minutes:480,cycle:30,cavities:4,availability:85,performance:95,quality:97}).v,480*60/30*4*.85*.95*.97,'oee capacity');
 near(p['break-even-volume'].c({fixed:80000,price:3.2,variable:2}).v,80000/1.2,'break even');

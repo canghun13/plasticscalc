@@ -3,6 +3,7 @@ import { join } from 'node:path';
 
 const js = `${readFileSync('assets/js/calculators.js', 'utf8')}\n${readFileSync('assets/js/phase3-calculators.js', 'utf8')}\n${readFileSync('assets/js/thermal-calculators.js', 'utf8')}\n${readFileSync('assets/js/validation-calculators.js', 'utf8')}`;
 const energyJs = readFileSync('assets/js/energy-calculators.js', 'utf8');
+const dfmJs = readFileSync('assets/js/dfm-calculators.js', 'utf8');
 const css = readFileSync('assets/css/site.css', 'utf8');
 const calculatorDirectory = 'tools/injection-molding';
 const calculatorPages = readdirSync(calculatorDirectory).filter(file => file.endsWith('.html') && readFileSync(join(calculatorDirectory, file), 'utf8').includes('data-calculator='));
@@ -16,7 +17,8 @@ const checks = [
   ['phase 3 calculator mount', js.includes('function mountPhase3') && js.includes('calc-workstation')],
   ['validation calculator mount', js.includes('function mountValidation') && js.includes('validation-workstation')],
   ['energy calculator mount', energyJs.includes('function mountEnergy') && energyJs.includes('calc-workstation')],
-  ['all calculator pages', calculatorPages.length === 48]
+  ['dfm calculator mount', dfmJs.includes('function mountDfm') && dfmJs.includes('calc-workstation')],
+  ['all calculator pages', calculatorPages.length === 52]
 ];
 const failed = checks.filter(([, passed]) => !passed).map(([name]) => name);
 console.log(JSON.stringify({ calculatorPages: calculatorPages.length, status: failed.length ? 'failed' : 'passed', checks: checks.map(([name]) => name), failed }));

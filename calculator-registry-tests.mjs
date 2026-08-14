@@ -8,9 +8,10 @@ const registryFiles = {
   phase3Tools: 'assets/js/phase3-calculators.js',
   thermalTools: 'assets/js/thermal-calculators.js',
   validationTools: 'assets/js/validation-calculators.js',
-  energyTools: 'assets/js/energy-calculators.js'
+  energyTools: 'assets/js/energy-calculators.js',
+  dfmTools: 'assets/js/dfm-calculators.js'
 };
-const source = `${readFileSync(registryFiles.tools, 'utf8')}\n${readFileSync(registryFiles.phase3Tools, 'utf8')}\n${readFileSync(registryFiles.thermalTools, 'utf8')}\n${readFileSync(registryFiles.validationTools, 'utf8')}\n${readFileSync(registryFiles.energyTools, 'utf8')}\nglobalThis.__tools = tools; globalThis.__phase3Tools = phase3Tools; globalThis.__thermalTools = thermalTools; globalThis.__validationTools = validationTools; globalThis.__energyTools = energyTools;`;
+const source = `${readFileSync(registryFiles.tools, 'utf8')}\n${readFileSync(registryFiles.phase3Tools, 'utf8')}\n${readFileSync(registryFiles.thermalTools, 'utf8')}\n${readFileSync(registryFiles.validationTools, 'utf8')}\n${readFileSync(registryFiles.energyTools, 'utf8')}\n${readFileSync(registryFiles.dfmTools, 'utf8')}\nglobalThis.__tools = tools; globalThis.__phase3Tools = phase3Tools; globalThis.__thermalTools = thermalTools; globalThis.__validationTools = validationTools; globalThis.__energyTools = energyTools; globalThis.__dfmTools = dfmTools;`;
 const context = { document: { addEventListener() {}, querySelector() { return null; } }, Intl };
 vm.createContext(context);
 vm.runInContext(source, context);
@@ -20,7 +21,8 @@ const registries = [
   { name: 'phase3Tools', entries: context.__phase3Tools, script: '/assets/js/phase3-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' },
   { name: 'thermalTools', entries: context.__thermalTools, script: '/assets/js/thermal-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' },
   { name: 'validationTools', entries: context.__validationTools, script: '/assets/js/validation-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' },
-  { name: 'energyTools', entries: context.__energyTools, script: '/assets/js/energy-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' }
+  { name: 'energyTools', entries: context.__energyTools, script: '/assets/js/energy-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' },
+  { name: 'dfmTools', entries: context.__dfmTools, script: '/assets/js/dfm-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' }
 ];
 const registryById = new Map();
 for (const registry of registries) {
@@ -33,7 +35,7 @@ for (const registry of registries) {
 const calculatorPages = readdirSync(calculatorDirectory)
   .filter(file => file.endsWith('.html') && readFileSync(join(calculatorDirectory,file),'utf8').includes('data-calculator='))
   .sort();
-if (calculatorPages.length !== 48) throw Error(`Expected 48 calculator pages, found ${calculatorPages.length}`);
+if (calculatorPages.length !== 52) throw Error(`Expected 52 calculator pages, found ${calculatorPages.length}`);
 
 const format = value => new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(value);
 const workedExampleFailures = [];

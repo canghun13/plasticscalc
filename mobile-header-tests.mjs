@@ -22,7 +22,7 @@ async function htmlFiles(directory) {
 }
 
 const files = await htmlFiles(root);
-assert.equal(files.length, 82, 'Expected all 82 published HTML files.');
+assert.equal(files.length, 89, 'Expected all 89 published HTML files.');
 for (const file of files) {
   const html = await readFile(file, 'utf8');
   assert.match(html, /<button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-navigation">MENU<\/button>/, `${file}: MENU button markup`);

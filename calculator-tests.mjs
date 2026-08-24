@@ -35,5 +35,8 @@ near(platenNoFit.v,112.5,'platen fit no orientation');
 if(!platenNoFit.d.includes('Does not fit'))throw Error('platen fit should reject a mold that fails both orientations');
 near(p['parts-per-shift'].c({minutes:480,cycle:30,cavities:4,uptime:90,scrap:3}).v,480*60/30*4*.9*.97,'parts per shift');
 near(p['oee-capacity'].c({minutes:480,cycle:30,cavities:4,availability:85,performance:95,quality:97}).v,480*60/30*4*.85*.95*.97,'oee capacity');
+near(p['masterbatch-dosage'].c({mode:'total',mass:200,dosage:2}).v,4,'masterbatch total-blend dosage');
+near(p['masterbatch-dosage'].c({mode:'base',mass:200,dosage:2}).v,4,'masterbatch base-resin addition');
+near(p['masterbatch-dosage'].c({mode:'active',mass:1000,active:50,target:1.5}).v,30,'masterbatch active-content target');
 near(p['break-even-volume'].c({fixed:80000,price:3.2,variable:2}).v,80000/1.2,'break even');
 console.log({calculatorTests:Object.keys(t).length+Object.keys(p).length,status:'passed'});

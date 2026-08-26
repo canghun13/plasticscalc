@@ -430,6 +430,147 @@ Future issues should be recorded here with:
 
 Add new entries at the top.
 
+### 2026-08-26 — Aggressive workflow discovery: Plastic Extrusion Setup & Line Balance GO
+
+- Repository preparation: canonical clone `C:\Users\song\Documents\ChatGPT\plasticscalc\canonical`; remote `https://github.com/canghun13/plasticscalc`; branch `main`; clean start at `bf5e130202ee15ac89872482f0765c7753608944`. `git ls-remote origin refs/heads/main`, `git fetch origin main`, and safe `git pull --ff-only` confirmed local `HEAD = origin/main = remote main` before edits.
+- Starting inventory: **89 public HTML**, **88 indexable/sitemap URLs**, **52 registered calculators/tools**. No GSC, GA4 landing-page, Bing, keyword, ranking, or traffic export was present, so no search-volume number or first-party performance claim was invented.
+- Source-of-truth review: latest handover was read before discovery. The full generator remains unsafe for the owner-managed homepage directory-badge suffix and was not run. `extrusion-pages.mjs` is scoped to new pages, three exact contextual insertions, and sitemap additions; it does not regenerate owner-managed page suffixes.
+
+#### Recent exclusion set
+
+- Implemented clusters excluded: Mold Cooling & Thermal Control; Process Validation & Stability; Energy Measurement & Efficiency; Part Design & DFM Feature Screening.
+- Existing/recently upgraded decisions excluded: Runner Volume/Weight, Sprue Volume, Clamp Tonnage, Cycle Time, Shot Size/Volume, OEE/production output, Residence Time (injection molding), Material Cost, Mold Amortization, Masterbatch Dosage, regrind blending, resin purchase planning, machine cost, and break-even volume.
+- Recent discovery/HOLD/REJECT/NO-GO families excluded: Material Drying/Moisture; Pressure/Transfer/Intensification; Runner/Gate Flow; SPC/Process Capability; Venting/Air Trap; Screw/Barrel/NRV maintenance; Mold PM; Robot/EOAT; Purge/Changeover; Production Campaign Scheduling; Regrind/Granulator Operations; Material Conveying/Hopper Logistics; Insert Molding; Hydraulic Leakage; Mold Steel/Surface Capability; Prototype/Bridge Route; Dimensional Inspection/Conditioning; Plastic Joining; Resin Substitution; Molded Marking; Hot Runner Compatibility; Ejection Planning; Post-Mold Conditioning; Pneumatic Accessories; Packaging Handoff; Hot-Runner Electrical Diagnostics; Defect Troubleshooting; Setup Sheet/Change Handoff; Nozzle-Sprue Interface; Molded Color Measurement; Mold Transfer Documentation; Shift Handoff/Production Closeout; Utility Connection Readiness; In-Mold Sensor Selection; Cavity Defect Mapping; First Article Reporting; Material Lot Genealogy; Mold Handling/Lifting; Shutdown/Restart Handoff.
+
+#### Broad discovery — 50 genuinely new workflow/search families
+
+Notation: `user | workflow | representative query | likely tools | depth | duplicate risk | competition | first verdict`.
+
+1. General extrusion line mass-flow balance — process engineer | reconcile extruder and take-off | `extrusion throughput line speed calculator` | calculator/analyzer | 6 | low | medium | advance.
+2. Timed extruder output testing — technician | weigh stable discharge | `extruder output test kg per hour` | calculator/record checker | 4 | low | low-medium | advance.
+3. Pipe extrusion mass-per-length planning — pipe producer | geometry to kg/m and kg/h | `pipe extrusion output line speed calculator` | calculator/planner | 5 | low | medium | advance.
+4. Tube extrusion die drawdown — tooling/process engineer | die/tip to final tube | `tube extrusion drawdown ratio calculator` | calculator/comparator | 4 | low | medium-high | advance inside extrusion.
+5. Profile extrusion section/output planning — profile producer | CAD area to output | `profile extrusion output calculator` | calculator/planner | 4 | low | medium | advance inside extrusion.
+6. Sheet extrusion gauge/output balance — sheet producer | width/gauge/speed to mass flow | `sheet extrusion throughput calculator` | calculator/analyzer | 4 | low | high | advance inside extrusion.
+7. Extruder screw peripheral-speed comparison — process engineer | normalize rpm across diameters | `extruder screw surface speed calculator` | calculator/comparator | 4 | low | low-medium | advance.
+8. Extrusion system hold-up/residence exposure — process engineer | hold-up divided by stable flow | `extruder residence time calculator` | calculator/planner | 4 | medium (different process) | low-medium | advance.
+9. Extrusion cooling-path layout — line designer | speed/time to trough path | `extrusion cooling tank length calculator` | planner/calculator | 4 | low | low-medium | advance.
+10. Extrusion roll OD/length/weight — film converter | plan finished roll | `plastic film roll length diameter calculator` | calculator/planner | 5 | low | very high | reject saturation.
+11. Extrusion gauge giveaway economics — production manager | compare target and actual gauge | `extrusion gauge variation material cost calculator` | analyzer/estimator | 4 | medium (cost) | medium | hold.
+12. Coextrusion layer mass allocation — coex engineer | split layer percentages by mass/cost | `coextrusion layer ratio calculator` | calculator/comparator | 5 | low | medium-high | hold.
+13. Screen-pack differential-pressure trend — operator | plan change from measured trend | `extrusion screen pack pressure change` | analyzer/planner | 3 | medium (pressure/changeover) | low | reject exclusion/weak static depth.
+14. Strand pelletizer cut geometry/capacity — compounder | strand count/speed/pellet length | `strand pelletizer throughput calculator` | calculator/planner | 3 | low | low-medium | hold, depth short.
+15. Blown-film BUR/layflat geometry — film operator | die/bubble/layflat relation | `blown film blow up ratio layflat calculator` | calculator/visualizer | 5 | low | high | mid-list.
+16. Blown-film output/line-speed balance — film producer | gauge/layflat/speed/output | `blown film output calculator` | calculator/planner | 5 | low | high | mid-list.
+17. Blown-film roll/reel planning — converter | footage/OD/weight | `blown film roll calculator` | calculator/planner | 4 | low | very high | combine then finalist review.
+18. Blown-film coex layer recipe/cost — film engineer | layer split and blend | `multilayer blown film layer calculator` | planner/comparator | 5 | low | high | finalist review.
+19. Cast-film chill-roll line balance — film producer | output/gauge/speed/chill width | `cast film line speed output calculator` | calculator/planner | 4 | low | medium-high | hold.
+20. Wire/cable coating material usage — cable engineer | conductor/coating geometry to mass | `cable extrusion material consumption calculator` | calculator/estimator | 4 | low | medium | hold.
+21. 3D-printer filament production drawdown — filament maker | die/filament diameter and speed | `filament extrusion drawdown calculator` | calculator/analyzer | 3 | low | noisy consumer SERP | reject search precision.
+22. Twin-screw compounding scale comparison — compounder | specific output/SMEC/residence | `twin screw extrusion scale up calculator` | comparator/planner | 4 | low | medium | hold; torque/data complexity.
+23. Pellet/strand cooling residence — compounder | bath length and strand speed | `strand pelletizing cooling length` | planner | 3 | low | low | merge with extrusion cooling.
+24. Extrusion blow-molding parison/container mass — blow molder | parison length/profile to bottle mass | `blow molding parison weight calculator` | calculator/planner | 4 | low | medium | hold.
+25. Extrusion blow-molding die/parison blow-up — blow molder | parison/mold geometry | `blow molding blow up ratio calculator` | calculator/checker | 4 | low | medium | hold.
+26. Blow-molding air-volume/cycle capacity — production engineer | bottle volume/cavities/cycle/air | `blow molding compressed air consumption calculator` | calculator/planner | 4 | low | medium | hold; equipment-specific losses.
+27. PET stretch-blow preform stretch ratios — package engineer | preform/bottle axial and hoop ratios | `PET stretch blow ratio calculator` | calculator/checker | 5 | low | high | mid-list.
+28. PET bottle/preform weight planning — packaging buyer | bottle surface/wall to starting mass | `PET preform weight calculator` | calculator/estimator | 4 | low | high/vendor catalogue | mid-list.
+29. Bottle leak-test line capacity — quality engineer | fill/stabilize/test/exhaust to stations | `bottle leak tester cycle time calculator` | planner | 3 | low | medium | merge with leak-test family.
+30. Thermoforming draw-ratio screening — part designer | developed area/opening area | `thermoforming draw ratio calculator` | calculator/checker | 4 | low | high | mid-list.
+31. Thermoforming sheet nesting/yield — estimator | cavities, pitch, edge trim, sheet usage | `thermoforming parts per sheet calculator` | planner/estimator | 5 | low | high/generic nesting | mid-list.
+32. Thermoforming sheet mass and job cost — estimator | gauge/area/density/yield | `thermoforming sheet material cost calculator` | calculator/estimator | 5 | medium (material cost) | medium-high | mid-list.
+33. Thermoforming heater dwell estimation — setup technician | material/thickness/heater condition | `thermoforming heating time calculator` | estimator | 3 | low | medium/vendor tool | finalist review but quality concern.
+34. Thermoforming vacuum evacuation sizing — machine engineer | volume/pressure/time/flow | `thermoforming vacuum pump flow calculator` | calculator/planner | 4 | low | medium-high/generic vacuum | finalist review.
+35. Thermoforming trim-scrap reconciliation — production manager | sheet input to good part/trim | `thermoforming trim scrap percentage calculator` | analyzer/estimator | 4 | medium (scrap) | low-medium | finalist review.
+36. Rotational-molding powder charge/wall — rotomolder | surface area/density/wall to shot | `rotational molding shot weight calculator` | calculator | 3 | low | low-medium | mid-list.
+37. Rotational-molding oven-arm capacity — planner | molds/arms/cycle to output | `rotational molding production capacity calculator` | planner | 3 | low | low | mid-list but empirical cycle.
+38. Compression-molding charge weight — compression molder | cavity volume/density/loss | `compression molding charge weight calculator` | calculator | 3 | low | low | mid-list candidate, depth weak.
+39. Compression press tonnage/pressure — process engineer | projected area × material pressure | `compression molding press tonnage calculator` | calculator/checker | 3 | medium (clamp) | low-medium | mid-list candidate, overlap risk.
+40. Compression cure/output capacity — planner | cure/open/load steps to output | `compression molding cycle time calculator` | calculator/planner | 3 | medium (cycle/output) | low | reject depth/overlap.
+41. Mechanical recycling delivered-to-dry mass balance — recycling operator | moisture/contamination/loss to flakes | `plastic recycling yield calculator` | calculator/analyzer | 6 | low | medium/vendor funnels | mid-list.
+42. Recycling target-output feed procurement — buyer/planner | reverse from saleable output using measured yield | `plastic recycling input output calculator` | planner/estimator | 4 | low | medium | mid-list.
+43. Recycling line stage bottleneck/capacity — plant engineer | stage capacities/utilization | `plastic recycling line capacity calculator` | analyzer/planner | 5 | low | medium/vendor selectors | mid-list.
+44. Recycling cost per saleable kilogram — owner/estimator | feed, utilities, labor, yield | `plastic recycling cost per kg calculator` | estimator/comparator | 5 | medium (cost) | medium | mid-list.
+45. Physical recycled-content batch formulation — compounder | virgin/recycled/additive masses | `recycled content batch calculator plastic` | calculator/planner | 5 | low | low-medium | mid-list.
+46. Loss-adjusted recycled-content reconciliation — sustainability/production | input claim versus output after loss | `recycled content mass balance calculator` | analyzer/planner | 5 | low | medium/standards | mid-list.
+47. Recycled-plastic chain-of-custody allocation — sustainability manager | credit/allocation ledger | `plastic mass balance allocation calculator` | planner/generator | 5 | low | low tools, high standards | mid-list.
+48. Molded-part pressure-decay leak-test setup — quality engineer | part volume/leak rate/test time/decay | `plastic part pressure decay leak rate calculator` | calculator/planner | 3 | low | high OEM calculators | mid-list.
+49. Injection mold RFQ normalization — sourcing engineer/tooling buyer | align revision/scope/steel/trials/terms | `compare injection mold quotes checklist tool` | checker/comparator/generator | 4 | medium (commercial) | medium/vendor checklists/SaaS | mid-list.
+50. Mold repair-versus-replace economics — tooling manager | downtime/repair life/new tool/quality risk | `mold repair vs replace cost calculator` | comparator/estimator | 3 | medium (PM/tooling cost) | low | reject exclusion and non-deterministic risk.
+
+#### Mid-list 10 — actual long-tail/SERP review
+
+| Candidate | Representative real queries | Opened competition and coverage | Natural strong tools | Mid-list verdict |
+|---|---|---|---:|---|
+| Extrusion production setup & line balance | `extrusion throughput line speed calculator`; `extruder output test kg per hour`; `extruder screw surface speed calculator`; `extruder residence time calculator`; `extrusion cooling tank length calculator` | [GaugeAdvisor throughput](https://gaugeadvisor.com/tools-extrusion-throughput-line-speed-calculator/) covers geometry/output; [PlastikCity rpm](https://www.plastikcity.co.uk/knowledge-base/industry-calculators/optimum-screw-rpm-calculator) covers one speed relation; [extrucal](https://extrucal.readthedocs.io/en/latest/) is a Python package; free workflow remains fragmented | 6 | **Finalist / strongest gap** |
+| Blown-film geometry & roll planning | `blown film blow up ratio layflat calculator`; `blown film output calculator`; `blown film roll diameter calculator`; `multilayer blown film calculator` | [PolyApp](https://polyapp.ca/) supplies seven packaging tools; [Techflow Film Calculator](https://www.techflowdesign.com/index.php/film-calculator/) covers BUR, drawdown, output, roll and multilayer cost in one tool | 5 | Finalist; strong demand, weak gap |
+| Thermoforming sheet yield & forming setup | `thermoforming draw ratio calculator`; `thermoforming heating time calculator`; `thermoforming vacuum pump flow calculator`; `thermoforming trim scrap calculator` | [Mesoforming draw ratio](https://mesoforming.com/thermoforming-draw-ratio-calculator/), heating and vacuum tools cover key setup steps; generic nesting tools are abundant | 6 nominal | Finalist; deterministic-quality concern |
+| Pipe/tube extrusion tooling & output | `pipe extrusion output line speed calculator`; `tube extrusion drawdown ratio calculator`; `profile extrusion output calculator`; `pipe cooling tank length` | [Rubicon hose calculator](https://www.rubicon-halle.de/en/service/calculator/hoses), [Guill drawdown visualizer](https://guill.com/resource/calculators/ddvis/), GaugeAdvisor | 5 | Strong but subsumed by broader extrusion finalist; not a separate finalist |
+| Mechanical recycling line mass balance & economics | `plastic recycling yield calculator`; `PET washing line output calculator`; `plastic recycling cost per kg calculator`; `recycling line bottleneck capacity` | [Boxin recycling yield](https://www.boxinpm.com/solutions/industrial-plastic-recycling-output-calculator-pet-hdpe-film.html) and multiple 2026 vendor capacity/ROI funnels use vendor-assumed efficiencies | 6 | Finalist; feed variability and vendor coverage weaken gap |
+| Recycled-content batch & chain-of-custody planning | `recycled content batch calculator plastic`; `recycled content mass balance calculator`; `mass balance allocation recycled plastic` | [CalcZero physical content](https://calczero.com/manufacturing/manufacturing-recycled-content-calculator.html); EPA ReCon focuses GHG; OECD/RecyClass describe changing accounting boundaries | 5 nominal | Finalist; certification/maintenance boundary |
+| Rotational-molding charge & capacity | `rotational molding shot weight calculator`; `rotomolding wall thickness shot weight`; `rotational molding production capacity calculator` | [Discebo wall/charge calculator](https://discebo.com/uddannelser/plastmager/beregnere/rotationsstoebning-godstykkelse); ARM guidance; Solvay states cycle must be experimental | 2–3 | Reject: only charge arithmetic is strong |
+| PET stretch-blow preform/bottle planning | `PET stretch ratio calculator`; `PET preform weight calculator`; `preform bottle compatibility calculator` | [Delta El Nile Preform Engineering](https://www.deltaelnile.com/en/preform-engineering.html) offers 11 tools, drawing upload, catalogue match, stretch and savings | 5 | Reject: a strong free/vendor workflow already dominates |
+| Injection mold RFQ/quote normalization | `injection molding RFQ template`; `compare injection mold quotes`; `injection mold cost estimator free` | [Topworks RFQ template](https://www.plasticmoulds.net/injection-molding-rfq-template), [A-Mold 15-point comparison](https://www.a-mold.com/how-to-compare-injection-mold-quotes), MoldEngine/Jiga/Xometry quoting flows | 4 nominal | Reject: mostly checklist/generator; price logic needs proprietary data |
+| Molded-part pressure-decay leak-test planning | `plastic part pressure decay leak rate calculator`; `bottle leak test cycle time`; `pressure decay reject level calculator` | [LeakMaster](https://www.leakmasterusa.com/tools/leak-rate-calculator), [Cincinnati Test Systems](https://www.cincinnati-test.com/leak-rate-calculator), COSMO and Uson already solve leak rate/time/volume | 2–3 | Reject: strong free substitutes and application-specific acceptance criteria |
+
+External-demand signals included repeated query variants, supplier/OEM guides, association references, diverse calculator intent, and recurring practitioner questions. No monthly-search number is claimed. Primary evidence for the selected cluster includes [SPE output testing](https://extrusion.4spe.org/wp-content/uploads/2019/01/EH-V22-3-H.pdf), [SPE sheet-line flow rate](https://extrusion.4spe.org/wp-content/uploads/2019/01/Vol25-03-09-Estimating-flow-rate-of-a-continuous-sheet-line-SPE-Extrusion-Division-1-0-Wiki.pdf), [SPE line planning](https://extrusion.4spe.org/wp-content/uploads/2019/01/Vol22-03-01-Planning-the-Extrusion-Line-SPE-Extrusion-Division-1-0-Wiki.pdf), [Thermo Fisher residence-time work](https://documents.thermofisher.com/TFS-Assets/CAD/Application-Notes/LR71-e-Investigating-Process-Parameter-Mechanism.pdf), [DuPont Surlyn extrusion guide](https://www.nevicolor.it/produkte/polymer-suchen/dupont/surlyn/documenti/surlyn-extrusion-guide.pdf), and [Eastman tubing/profile extrusion guide](https://www.eastman.com/content/dam/eastman/corporate/en/literature/s/spmbs1431.pdf).
+
+#### Finalists 5 — scoring and gates
+
+| Finalist | Search /40 | Monetization /30 | Gap /20 | Repeatability /10 | Total | Decision |
+|---|---:|---:|---:|---:|---:|---|
+| **Extrusion production setup & line balance** | 36 | 25 | 17 | 8 | **86** | **GO** |
+| Thermoforming sheet yield & forming setup | 33 | 24 | 14 | 8 | **79** | HOLD |
+| Blown-film geometry & roll planning | 35 | 25 | 10 | 8 | **78** | REJECT/HOLD |
+| Mechanical recycling line mass balance & economics | 31 | 27 | 13 | 7 | **78** | HOLD |
+| Recycled-content batch & chain-of-custody planning | 33 | 26 | 11 | 7 | **77** | HOLD |
+
+| Gate | Extrusion | Thermoforming | Blown film | Recycling line | Recycled content |
+|---|---|---|---|---|---|
+| A Genuine Newness | PASS | PASS | PASS | PASS | PASS |
+| B Search Demand | PASS | PASS | PASS | PASS | PASS |
+| C ≥4 independent tools | PASS (6) | PASS nominal (6) | PASS (5) | PASS (6) | PASS nominal (5) |
+| D Competitive Gap | PASS — fragmented single-step tools | PASS, narrower | **FAIL — Techflow/PolyApp cover workflow** | **FAIL — fast-growing vendor calculators cover core yield/capacity** | PASS, but narrow |
+| E Distinct from PlasticsCalc | PASS | PASS | PASS | PASS | PASS |
+| F Deterministic Quality | PASS — measured/geometry inputs, no universal thresholds | **FAIL — heating/forming quality needs material/machine empirical models** | PASS for arithmetic | PASS only with measured user efficiencies | **FAIL — claim allocation depends on scheme/regulation** |
+| G Static Feasibility | PASS | PASS | PASS | PASS | PASS |
+| H Low Maintenance | PASS | PASS for geometry, weaker for presets | PASS | PASS if no presets | **FAIL — standards and policy evolve** |
+| I Cluster Coherence | PASS | PASS | PASS | PASS | PASS |
+| J Actionability | PASS | PASS | PASS | PASS | PASS |
+
+- Why users visit PlasticsCalc for the GO: vendor-neutral, no login or CAD upload, mobile-ready immediate calculations, transparent formula and basis, and six sequential but independent decisions. GaugeAdvisor solves geometry-to-output; PlastikCity solves a speed relation; extrucal requires Python. None of those free substitutes connects an actual timed output measurement to net product demand, screw kinematics, hold-up exposure, tube tooling geometry, and cooling-space planning.
+- Why 76–79 finalists did not receive an aggressive GO: each missed at least one hard gate. Thermoforming could only reach six pages by including empirical heating/vacuum/forming assumptions; blown film already has strong free workflow-wide substitutes; recycling-line core output/capacity tools are rapidly filled by vendor funnels and rely heavily on feed-specific trial data; recycled-content allocation crosses evolving certification and regulatory boundaries.
+
+#### Selected technical specification and implementation
+
+Selected cluster: **Plastic Extrusion Setup & Line Balance**. New pages are one natural hub plus six strong tools; no filler guide was created.
+
+1. `extrusion-output-test` — Calculator; operator/process engineer; timed collected mass + interval + rpm; output = mass × 3,600/time and specific output = kg/h/rpm; outputs measured kg/h and normalized output; next decision is compare with line demand or investigate a documented change; repeated for stable output checks.
+2. `extrusion-line-throughput` — Calculator/planner; line/process engineer; final net section + take-off speed + solid density; output = area × speed × density × 0.06; outputs required net kg/h and kg/m; next decision is equipment/downstream capacity and separately applied yield; independent because it predicts product demand rather than measuring extruder supply.
+3. `extrusion-screw-surface-speed` — Calculator/comparator; process/scale-up engineer; screw OD + rpm; speed = πD × rpm; outputs m/min and rev/s; next decision is compare operating points with OEM, torque, temperature and specific-output evidence; independent kinematic comparison.
+4. `extrusion-residence-time` — Calculator/planner; process/material engineer; measured total system hold-up + stable output; mean = hold-up/output × 60; outputs mean minutes and hold-up equivalents/hour; next decision is tracer study or material exposure review; explicitly not RTD/first-out/last-out.
+5. `extrusion-drawdown-ratio` — Calculator; tube tooling/process engineer; die OD, tip OD, finished tube OD/ID; DDR = annular die area / annular product area; outputs ratio and both areas; next decision is material-specific tooling/trial review; no universal acceptable range.
+6. `extrusion-cooling-length` — Planner/calculator; line designer/process engineer; take-off speed + trial/supplier-supported cooling time + usable straight path; path = speed × seconds/60; outputs required path and idealized pass count; next decision is add path, change validated cooling method, or reduce speed; tool does not invent cooling time.
+
+- New files/pages: `tools/extrusion/index.html`; six `tools/extrusion/extrusion-*.html` tools; `assets/js/extrusion-calculators.js`; `extrusion-calculator-tests.mjs`; scoped `extrusion-pages.mjs`.
+- Registry keys: `extrusion-output-test`, `extrusion-line-throughput`, `extrusion-screw-surface-speed`, `extrusion-residence-time`, `extrusion-drawdown-ratio`, `extrusion-cooling-length`.
+- Internal links: one homepage section, one Tool Index section, one density-specific Materials Hub section, the new hub workflow map, and contextual cross-links among new tools. No mechanical Injection Molding Hub link was added because the process intent is distinct.
+- SEO: unique titles/descriptions/canonicals/OG metadata/H1/breadcrumb/SoftwareApplication or WebPage JSON-LD plus seven sitemap URLs.
+- Unsupported/limitations are explicit on every page: no equipment selection; no universal speed/drawdown/cooling/residence limit; no prediction of melt pressure, torque, shear, die swell, RTD, heat transfer, or product approval.
+
+#### Verification and QA
+
+- Independent fixtures: **18** total — three independently computed fixtures for each of six production calculations. Expected values are literal arithmetic in `extrusion-calculator-tests.mjs`; production functions do not generate expected values. Page/source/content contracts are also checked.
+- All automated tests passed after implementation: `calculator-registry-tests.mjs` (58 pages/58 entries), `calculator-tests.mjs` (33), `calculator-ui-tests.mjs` (58), `consent-tests.mjs`, `content-value-tests.mjs`, DFM (12), Energy (12), Extrusion (18), markup (96 pages), Masterbatch (7), mobile header (96), pre-expansion audit, Thermal (45), Validation (32), contrast (14.77:1/13.76:1 table checks), new JS syntax, and `verify.mjs`.
+- Final structural result: **96 public HTML**, **95 indexable/sitemap URLs**, **58 registered tools**; broken links 0; metadata/canonical/sitemap mismatch 0; malformed/anchor/duplicate-ID/encoding issues 0; registry/loader mismatch 0; JS syntax errors 0; default NaN/undefined/Infinity 0.
+- Actual Browser QA: **78 page-viewports**. Every new page at 390/768/900/1024/1280/1440 = 42. Twelve existing representatives at 390/1024/1440 = 36: Homepage, Tool Index, Injection Molding Hub, Materials Hub, Cooling/Thermal Hub, Parts Per Hour, Material Cost, injection Residence Time, Process Validation Hub, Product Energy Intensity, Boss Design Checker, and Method/About.
+- Responsive DOM/layout result: horizontal overflow 0; header/H1 overlap 0; detected clipped visible elements 0; footer and MENU present on every tested view. Seven full-page 390px screenshots were visually inspected; long H1s wrap cleanly, field labels/units remain attached, buttons are full-width and usable, result numbers are visible, cards and references remain readable, and footer content is not clipped.
+- Actual interactions on all six tools: default, changed input, recalculate, Reset, blank, negative invalid, small positive boundary, and the drawdown contradictory geometry case. All produced the expected changed/restore/error/finite state; no NaN/undefined/Infinity appeared.
+- Computed contrast at 390px: result number 16.36:1; result detail 13.88:1; input label 16.36:1; helper/unit text 6.06:1. All exceed 4.5:1 for normal text. Result number font size was 32px and visible.
+- Mobile MENU cache-bypass QA: closed `aria-expanded=false`/nav hidden; click opens `aria-expanded=true`/grid nav; second click restores closed state. The analytics consent dialog rendered, Decline removed it, and the choice persisted on navigation. Homepage owner-managed suffix still has six badge images including exactly one KittyLaunch badge. Footer, badges, and consent logic were not removed or reordered.
+- Console: zero warning/error entries on each of seven new pages. No new overlay, clipping, overflow, or result readability defect was found.
+- HIGH: none. MEDIUM: no first-party GSC/GA4/Bing search/landing-page exports; extrusion search opportunity therefore rests on observable multi-query SERP and engineering evidence rather than measured traffic. Production deployment status and final remote SHA are recorded after push below.
+- Operating readiness: code and local QA are complete; release awaits commit/push/Pages confirmation in this session.
+
 ### 2026-08-24 — Existing Masterbatch Dosage growth upgrade: GO and shipped basis-aware recipe workflow
 
 - Repository and baseline: canonical clone `C:\Users\song\Documents\ChatGPT\plasticscalc\canonical`, remote `https://github.com/canghun13/plasticscalc.git`, branch `main`. The actual remote was fetched and applied with `git pull --ff-only`; work began from clean commit `76326de0602008d5d0cf78909c7ad06c554beea2`. Baseline and final inventory remain **89 public HTML files, 88 indexable pages / 88 sitemap URLs, and 52 registered tools**.

@@ -5,8 +5,9 @@ const js = `${readFileSync('assets/js/calculators.js', 'utf8')}\n${readFileSync(
 const energyJs = readFileSync('assets/js/energy-calculators.js', 'utf8');
 const dfmJs = readFileSync('assets/js/dfm-calculators.js', 'utf8');
 const extrusionJs = readFileSync('assets/js/extrusion-calculators.js', 'utf8');
+const filmTestingJs = readFileSync('assets/js/film-testing-calculators.js', 'utf8');
 const css = readFileSync('assets/css/site.css', 'utf8');
-const calculatorDirectories = ['tools/injection-molding','tools/extrusion'];
+const calculatorDirectories = ['tools/injection-molding','tools/extrusion','tools/film-testing'];
 const calculatorPages = calculatorDirectories.flatMap(directory => readdirSync(directory).filter(file => file.endsWith('.html') && readFileSync(join(directory, file), 'utf8').includes('data-calculator=')));
 const checks = [
   ['field wrapper', js.includes('<div class="calc-field">')],
@@ -20,7 +21,8 @@ const checks = [
   ['energy calculator mount', energyJs.includes('function mountEnergy') && energyJs.includes('calc-workstation')],
   ['dfm calculator mount', dfmJs.includes('function mountDfm') && dfmJs.includes('calc-workstation')],
   ['extrusion calculator mount', extrusionJs.includes('function mountExtrusion') && extrusionJs.includes('calc-workstation')],
-  ['all calculator pages', calculatorPages.length === 58]
+  ['film testing calculator mount', filmTestingJs.includes('function mountFilmTesting') && filmTestingJs.includes('calc-workstation')],
+  ['all calculator pages', calculatorPages.length === 63]
 ];
 const failed = checks.filter(([, passed]) => !passed).map(([name]) => name);
 console.log(JSON.stringify({ calculatorPages: calculatorPages.length, status: failed.length ? 'failed' : 'passed', checks: checks.map(([name]) => name), failed }));

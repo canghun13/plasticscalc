@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import vm from 'node:vm';
 
-const calculatorDirectories = ['tools/injection-molding','tools/extrusion'];
+const calculatorDirectories = ['tools/injection-molding','tools/extrusion','tools/film-testing'];
 const registryFiles = {
   tools: 'assets/js/calculators.js',
   phase3Tools: 'assets/js/phase3-calculators.js',
@@ -10,9 +10,10 @@ const registryFiles = {
   validationTools: 'assets/js/validation-calculators.js',
   energyTools: 'assets/js/energy-calculators.js',
   dfmTools: 'assets/js/dfm-calculators.js',
-  extrusionTools: 'assets/js/extrusion-calculators.js'
+  extrusionTools: 'assets/js/extrusion-calculators.js',
+  filmTestingTools: 'assets/js/film-testing-calculators.js'
 };
-const source = `${readFileSync(registryFiles.tools, 'utf8')}\n${readFileSync(registryFiles.phase3Tools, 'utf8')}\n${readFileSync(registryFiles.thermalTools, 'utf8')}\n${readFileSync(registryFiles.validationTools, 'utf8')}\n${readFileSync(registryFiles.energyTools, 'utf8')}\n${readFileSync(registryFiles.dfmTools, 'utf8')}\n${readFileSync(registryFiles.extrusionTools, 'utf8')}\nglobalThis.__tools = tools; globalThis.__phase3Tools = phase3Tools; globalThis.__thermalTools = thermalTools; globalThis.__validationTools = validationTools; globalThis.__energyTools = energyTools; globalThis.__dfmTools = dfmTools; globalThis.__extrusionTools = extrusionTools;`;
+const source = `${readFileSync(registryFiles.tools, 'utf8')}\n${readFileSync(registryFiles.phase3Tools, 'utf8')}\n${readFileSync(registryFiles.thermalTools, 'utf8')}\n${readFileSync(registryFiles.validationTools, 'utf8')}\n${readFileSync(registryFiles.energyTools, 'utf8')}\n${readFileSync(registryFiles.dfmTools, 'utf8')}\n${readFileSync(registryFiles.extrusionTools, 'utf8')}\n${readFileSync(registryFiles.filmTestingTools, 'utf8')}\nglobalThis.__tools = tools; globalThis.__phase3Tools = phase3Tools; globalThis.__thermalTools = thermalTools; globalThis.__validationTools = validationTools; globalThis.__energyTools = energyTools; globalThis.__dfmTools = dfmTools; globalThis.__extrusionTools = extrusionTools; globalThis.__filmTestingTools = filmTestingTools;`;
 const context = { document: { addEventListener() {}, querySelector() { return null; } }, Intl };
 vm.createContext(context);
 vm.runInContext(source, context);
@@ -24,7 +25,8 @@ const registries = [
   { name: 'validationTools', entries: context.__validationTools, script: '/assets/js/validation-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' },
   { name: 'energyTools', entries: context.__energyTools, script: '/assets/js/energy-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' },
   { name: 'dfmTools', entries: context.__dfmTools, script: '/assets/js/dfm-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' },
-  { name: 'extrusionTools', entries: context.__extrusionTools, script: '/assets/js/extrusion-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' }
+  { name: 'extrusionTools', entries: context.__extrusionTools, script: '/assets/js/extrusion-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' },
+  { name: 'filmTestingTools', entries: context.__filmTestingTools, script: '/assets/js/film-testing-calculators.js', inputs: 'i', calculate: 'c', value: 'v', unit: 'u' }
 ];
 const registryById = new Map();
 for (const registry of registries) {
@@ -38,7 +40,7 @@ const calculatorPages = calculatorDirectories.flatMap(directory => readdirSync(d
   .filter(file => file.endsWith('.html') && readFileSync(join(directory,file),'utf8').includes('data-calculator='))
   .map(file => ({directory,file})))
   .sort((a,b)=>`${a.directory}/${a.file}`.localeCompare(`${b.directory}/${b.file}`));
-if (calculatorPages.length !== 58) throw Error(`Expected 58 calculator pages, found ${calculatorPages.length}`);
+if (calculatorPages.length !== 63) throw Error(`Expected 63 calculator pages, found ${calculatorPages.length}`);
 
 const format = value => new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(value);
 const workedExampleFailures = [];

@@ -10,7 +10,7 @@ near(t['shot-volume'].calc({weight:180,density:.95}).value,180/.95,'shot volume'
 near(t['projected-area'].calc({length:120,width:80,cavities:2,runner:12}).value,204,'projected area');
 near(t['cycle-time'].calc({fill:2.5,pack:5,cool:18,motion:5}).value,30.5,'cycle time');
 near(t['cooling-time'].calc({wall:3,alpha:.12,melt:240,mold:60,eject:95}).value,9/(Math.PI**2*.12)*Math.log(4*180/(Math.PI*35)),'cooling time');
-near(t['parts-per-hour'].calc({cycle:30,cavities:4,uptime:90}).value,432,'parts per hour');
+near(t['parts-per-hour'].calc({cycle:30,cavities:4}).value,480,'parts per hour');
 near(t['cavity-count'].calc({annual:500000,hours:4000,cycle:30,uptime:85}).value,2,'cavity count');
 near(t['mold-shrinkage'].calc({part:100,shrink:1.5}).value,100/.985,'mold shrinkage');
 near(t['resin-weight'].calc({volume:85,density:1.05,cavities:2}).value,178.5,'resin weight');

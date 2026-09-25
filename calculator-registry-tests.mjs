@@ -52,7 +52,8 @@ for (const {directory,file} of calculatorPages) {
 
   const entry = registryById.get(id);
   if (!entry) throw Error(`${path}: ${id} has no JavaScript registry entry`);
-  if (!html.includes(`src="${entry.registry.script}"`)) {
+  const scriptPath = entry.registry.script.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  if (!new RegExp(`src="${scriptPath}(?:\\?[^\"]*)?"`).test(html)) {
     throw Error(`${path}: ${id} does not load ${entry.registry.script}`);
   }
 

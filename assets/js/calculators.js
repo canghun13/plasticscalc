@@ -5,7 +5,11 @@ const tools={
   'projected-area':{name:'Projected Area',inputs:[['length','Projected length',120,'mm'],['width','Projected width',80,'mm'],['cavities','Cavities',2,''],['runner','Runner projected area',12,'cm&sup2;']],calc:v=>({value:(v.length*v.width/100*v.cavities)+v.runner,unit:'cm²',detail:'Rectangle approximation including runner area; use CAD or parting-line projection for complex shapes.'})},
   'cycle-time':{name:'Cycle Time',inputs:[['fill','Fill/injection time',2.5,'s'],['pack','Pack/hold time',5,'s'],['cool','Cooling time',18,'s'],['motion','Open, eject and close time',5,'s']],calc:v=>({value:v.fill+v.pack+v.cool+v.motion,unit:'s/cycle',detail:`Cooling share: ${(v.cool/(v.fill+v.pack+v.cool+v.motion)*100).toFixed(1)}%.`})},
   'cooling-time':{name:'Cooling Time',inputs:[['wall','Maximum wall thickness',3,'mm'],['alpha','Thermal diffusivity',0.12,'mm&sup2;/s'],['melt','Melt temperature',240,'&deg;C'],['mold','Mold temperature',60,'&deg;C'],['eject','Ejection temperature',95,'&deg;C']],calc:v=>{const ratio=4*(v.melt-v.mold)/(Math.PI*(v.eject-v.mold));return{value:(v.wall*v.wall/(Math.PI*Math.PI*v.alpha))*Math.log(ratio),unit:'s estimated cooling time',detail:'One-dimensional flat-wall heat-transfer estimate.'}}},
-  'parts-per-hour':{name:'Parts Per Hour',inputs:[['cycle','Cycle time',30,'s'],['cavities','Cavities',4,''],['uptime','Planned uptime',90,'%']],calc:v=>({value:3600/v.cycle*v.cavities*v.uptime/100,unit:'parts/hour',detail:'Includes the entered planned uptime only; reject rate is not deducted.'})},
+  'parts-per-hour':{name:'Parts Per Hour',inputs:[['cycle','Cycle time',30,'s'],['cavities','Active cavities',4,'whole cavities']],validate:v=>{
+    if(!Number.isFinite(v.cycle)||v.cycle<=0)return'Cycle time must be a finite value greater than zero.';
+    if(!Number.isSafeInteger(v.cavities)||v.cavities<=0)return'Active cavities must be a positive whole number.';
+    return'';
+  },calc:v=>{const cyclesPerHour=3600/v.cycle;const value=cyclesPerHour*v.cavities;return{value,unit:'parts/hour',detail:'Theoretical continuous rate; downtime, speed loss, and rejected parts are not included.',metrics:{cyclesPerHour,partsPerMinute:value/60,partsPerCycle:v.cavities}}}},
   'cavity-count':{name:'Cavity Count',inputs:[['annual','Annual good-part demand',500000,'parts'],['hours','Available annual machine hours',4000,'h'],['cycle','Cycle time',30,'s'],['uptime','Planned uptime',85,'%']],calc:v=>({value:Math.ceil(v.annual/(v.hours*3600/v.cycle*v.uptime/100)),unit:'minimum cavities',detail:'Rounds up to satisfy demand at the stated available hours and uptime.'})},
   'mold-shrinkage':{name:'Mold Shrinkage',inputs:[['part','Target molded part dimension',100,'mm'],['shrink','Linear shrinkage',1.5,'%']],calc:v=>({value:v.part/(1-v.shrink/100),unit:'mm mold cavity dimension',detail:'Verify with material data and mold trials.'})},
   'resin-weight':{name:'Resin Weight',inputs:[['volume','Part volume',85,'cm&sup3;'],['density','Material density',1.05,'g/cm&sup3;'],['cavities','Cavities',2,'']],calc:v=>({value:v.volume*v.density*v.cavities,unit:'g per shot',detail:'Uses density × volume × cavities. Add runners separately if applicable.'})},
@@ -16,12 +20,14 @@ const tools={
 };
 
 const fmt=n=>Number.isFinite(n)?new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(n):'Check inputs';
+const fmtRate=n=>Number.isFinite(n)?new Intl.NumberFormat('en-US',{maximumSignificantDigits:8}).format(n):'Check inputs';
 const field=([key,label,defaultValue,unit])=>`<div class="calc-field"><label for="${key}">${label}</label><input id="${key}" name="${key}" type="number" step="any" min="0" required value="${defaultValue}" aria-describedby="${key}-unit"><span class="unit" id="${key}-unit">${unit||'Unitless input'}</span></div>`;
 
 function validateDomain(id,v){
   if(['shot-volume','resin-weight'].includes(id)&&v.density<=0)return'Material density must be greater than zero.';
   if(id==='cooling-time'&&(v.alpha<=0||v.melt<=v.mold||v.eject<=v.mold||v.eject>=v.melt))return'Cooling temperatures must satisfy melt > ejection > mold, and thermal diffusivity must be greater than zero.';
-  if(['parts-per-hour','cavity-count'].includes(id)&&v.cycle<=0)return'Cycle time must be greater than zero.';
+  if(id==='parts-per-hour')return tools[id].validate(v);
+  if(id==='cavity-count'&&v.cycle<=0)return'Cycle time must be greater than zero.';
   if(id==='cavity-count'&&(v.hours<=0||v.uptime<=0))return'Available hours and planned uptime must be greater than zero.';
   if(id==='material-cost'&&v.cavities<=0)return'Cavity count must be greater than zero.';
   if(id==='scrap-rate'&&v.good+v.scrap<=0)return'Enter at least one good or scrap part.';
@@ -36,19 +42,23 @@ function mountCalculator(){
   if(!root)return;
   const tool=tools[root.dataset.calculator];
   if(!tool)return;
-  root.innerHTML=`<section class="calc-workstation" aria-label="${tool.name} calculator"><div class="panel calc-input-panel"><p class="workspace-label">Input parameters</p><h2>Calculate ${tool.name}</h2><form id="calc-form" novalidate>${tool.inputs.map(field).join('')}<div class="calc-controls"><button type="submit">Calculate</button><button class="secondary" type="reset">Reset values</button></div><p class="form-error" id="calc-error" role="alert" hidden></p></form></div><aside class="panel result calc-result-panel" aria-live="polite" aria-atomic="true"><p>Estimated result</p><div class="number" id="calc-value">—</div><p id="calc-detail">Enter values and calculate.</p></aside></section>`;
+  const isPartsPerHour=root.dataset.calculator==='parts-per-hour';
+  const rateSummary=isPartsPerHour?'<dl class="rate-summary" aria-label="Theoretical rate breakdown"><div><dt>Cycles per hour</dt><dd data-rate-metric="cyclesPerHour">—</dd></div><div><dt>Parts per minute</dt><dd data-rate-metric="partsPerMinute">—</dd></div><div><dt>Parts per cycle</dt><dd data-rate-metric="partsPerCycle">—</dd></div></dl>':'';
+  root.innerHTML=`<section class="calc-workstation" aria-label="${tool.name} calculator"><div class="panel calc-input-panel"><p class="workspace-label">Input parameters</p><h2>Calculate ${tool.name}</h2><form id="calc-form" novalidate>${tool.inputs.map(field).join('')}<div class="calc-controls"><button type="submit">Calculate</button><button class="secondary" type="reset">Reset values</button></div><p class="form-error" id="calc-error" role="alert" hidden></p></form></div><aside class="panel result calc-result-panel" aria-live="polite" aria-atomic="true"><p>${isPartsPerHour?'Theoretical rate':'Estimated result'}</p><div class="number" id="calc-value">—</div><p id="calc-detail">Enter values and calculate.</p>${rateSummary}</aside></section>`;
   const form=root.querySelector('form');
+  if(isPartsPerHour){const cavityInput=form.querySelector('[name="cavities"]');cavityInput.step='1';cavityInput.min='1'}
   const error=root.querySelector('#calc-error');
   const value=root.querySelector('#calc-value');
   const detail=root.querySelector('#calc-detail');
-  const showError=message=>{error.hidden=false;error.textContent=message;value.textContent='—';detail.textContent='Correct the input and calculate again.';form.querySelector('[aria-invalid="true"]')?.focus()};
+  const metrics=[...root.querySelectorAll('[data-rate-metric]')];
+  const showError=message=>{error.hidden=false;error.textContent=message;value.textContent='—';detail.textContent='Correct the input and calculate again.';metrics.forEach(metric=>metric.textContent='—');form.querySelector('[aria-invalid="true"]')?.focus()};
   const calculate=()=>{
     const values=Object.fromEntries(new FormData(form));
     let invalid='';
-    Object.keys(values).forEach(key=>{values[key]=Number(values[key]);const input=form.querySelector(`[name="${key}"]`);const bad=!Number.isFinite(values[key])||values[key]<0;input.setAttribute('aria-invalid',bad?'true':'false');if(bad&&!invalid)invalid=`Enter a valid non-negative value for ${tool.inputs.find(input=>input[0]===key)[1]}.`});
+    Object.keys(values).forEach(key=>{const raw=values[key];values[key]=Number(raw);const input=form.querySelector(`[name="${key}"]`);const bad=(isPartsPerHour&&raw==='')||!Number.isFinite(values[key])||values[key]<0;input.setAttribute('aria-invalid',bad?'true':'false');if(bad&&!invalid)invalid=`Enter a valid non-negative value for ${tool.inputs.find(input=>input[0]===key)[1]}.`});
     invalid||=validateDomain(root.dataset.calculator,values);
     if(invalid){showError(invalid);return}
-    try{const result=tool.calc(values);if(!Number.isFinite(result.value))throw Error();error.hidden=true;value.textContent=`${fmt(result.value)} ${result.unit}`;detail.textContent=result.detail}catch{showError('These inputs cannot produce a valid estimate. Review the values and units.')}
+    try{const result=tool.calc(values);if(!Number.isFinite(result.value))throw Error();const format=isPartsPerHour?fmtRate:fmt;error.hidden=true;value.textContent=`${format(result.value)} ${result.unit}`;detail.textContent=result.detail;metrics.forEach(metric=>metric.textContent=format(result.metrics?.[metric.dataset.rateMetric]))}catch{showError('These inputs cannot produce a valid estimate. Review the values and units.')}
   };
   form.addEventListener('submit',event=>{event.preventDefault();calculate()});
   form.addEventListener('reset',()=>setTimeout(calculate));

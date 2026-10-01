@@ -44,3 +44,4 @@ await import('./enrich-pre-expansion-audit.mjs');
 await import('./phase3-pages.mjs');
 await import('./refresh-assets.mjs');
 await import('./parts-per-hour-pages.mjs');
+await import('./projected-area-pages.mjs');

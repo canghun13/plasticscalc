@@ -116,7 +116,12 @@ Expansion considered: yes, as a lower-priority alternative. Latest implemented t
 
 ## Deployment
 
-Pending commit, remote confirmation, GitHub Pages and live browser verification. Do not treat local QA or CI alone as production acceptance.
+- Implementation commits: `05eff2dddbcbce11eeff5b114a172aa9ca6b0bd7` (workflow) and final runtime `8e0eee7035697b1f72daf5b9fc5fee59da71dba4` (narrow-width readability). Both pushed to `main`; local HEAD/cached origin/actual `ls-remote` matched at runtime acceptance, with clean tree.
+- GitHub Pages [run 36801855364](https://github.com/canghun13/plasticscalc/actions/runs/36801855364) completed **success** for final runtime SHA. The first implementation run 36801599987 also succeeded; acceptance uses the final runtime, not that earlier version.
+- Live HTTPS apex target HTTP 200, exact HTML match. Final version-2 CSS/JS and homepage match repository after normalizing Git's LF versus Windows CRLF; the initial raw-string mismatch was only line endings, not stale code. No X-Robots-Tag block. Canonical unchanged and correct.
+- Real production browser at **390 and 1024 px**: default 204 cm²/31.620063 in², circle 169.07963, imperial conversion preserves circle area, CAD 42.5×4+10 = 180; fractional cavity clears result/metrics and gives the intended error; Reset restores 204. Actual render, footer, units and short mode labels present. No overflow, broken images, visible NaN/Infinity/undefined, console warnings or errors. Target MENU opens and Escape closes on mobile. Copy/Print not implemented or applicable.
+- Production homepage mobile control: owner suffix six links/six images, no broken images or overflow. Homepage normalized source matches unchanged repository; badge suffix hash/inventory unchanged. Screenshot proof was saved outside the production repository; no local absolute path or analytics export was committed.
+- The following documentation-only commit records completed acceptance without changing runtime assets. Final closing Git SHA is reported in the session's final report; deployment evidence above identifies the independently verified runtime commit.
 
 ## Next state (three only)
 

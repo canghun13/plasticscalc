@@ -33,4 +33,7 @@ assert.ok(html.includes('cavities = 1'));
 assert.ok(html.includes('1 in² = 6.4516 cm²'));
 assert.ok(html.includes('Known/CAD projected area'));
 assert.ok(html.includes('Dynisco'));
+assert.ok(html.includes('class="projected-area-page"'));
+const uiSource=readFileSync('assets/js/calculators.js','utf8');
+for(const label of ['Rectangle','Circle','Known/CAD area','mm + cm²','in + in²'])assert.ok(uiSource.includes(`>${label}</option>`));
 console.log(JSON.stringify({status:'passed',fixtures:fixtures.length,invalid:invalid.length,numericBoundaries:2}));

@@ -3,11 +3,12 @@ import { readFileSync, writeFileSync } from 'node:fs';
 // Finalize only this existing tool. Never regenerate the owner-managed homepage.
 const path='tools/injection-molding/projected-area.html';
 let html=readFileSync(path,'utf8');
+html=html.replace(/<body(?: class="projected-area-page")?>/,'<body class="projected-area-page">');
 const description='Calculate projected mold area from rectangle dimensions, circle diameter, or CAD area; include cavities and runners, with cm² and in² results.';
 html=html.replace(/(<meta name="description" content=")[^"]*(">)/,`$1${description}$2`)
   .replace(/(<meta property="og:description" content=")[^"]*(">)/,`$1${description}$2`)
-  .replace(/\/assets\/css\/site\.css(?:\?v=[^"]+)?/,'/assets/css/site.css?v=20261001-projection-1')
-  .replace(/\/assets\/js\/calculators\.js(?:\?v=[^"]+)?/,'/assets/js/calculators.js?v=20261001-projection-1');
+  .replace(/\/assets\/css\/site\.css(?:\?v=[^"]+)?/,'/assets/css/site.css?v=20261001-projection-2')
+  .replace(/\/assets\/js\/calculators\.js(?:\?v=[^"]+)?/,'/assets/js/calculators.js?v=20261001-projection-2');
 const start=html.indexOf('<section class="hero">');
 const end=html.indexOf('</main>',start);
 if(start<0||end<0)throw Error('Projected Area content markers missing.');

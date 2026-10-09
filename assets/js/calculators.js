@@ -118,7 +118,7 @@ function mountCalculator(){
   const calculate=()=>{
     const values=Object.fromEntries(new FormData(form));
     let invalid='';
-    Object.keys(values).forEach(key=>{const raw=values[key];values[key]=Number(raw);const input=form.querySelector(`[name="${key}"]`);const bad=(isPartsPerHour&&raw==='')||!Number.isFinite(values[key])||values[key]<0;input.setAttribute('aria-invalid',bad?'true':'false');if(bad&&!invalid)invalid=`Enter a valid non-negative value for ${tool.inputs.find(input=>input[0]===key)[1]}.`});
+    Object.keys(values).forEach(key=>{const raw=values[key];values[key]=Number(raw);const input=form.querySelector(`[name="${key}"]`);const bad=raw.trim()===''||!Number.isFinite(values[key])||values[key]<0;input.setAttribute('aria-invalid',bad?'true':'false');if(bad&&!invalid)invalid=`Enter a valid non-negative value for ${tool.inputs.find(input=>input[0]===key)[1]}.`});
     invalid||=validateDomain(root.dataset.calculator,values);
     if(invalid){showError(invalid);return}
     try{const result=tool.calc(values);if(!Number.isFinite(result.value))throw Error();const format=isPartsPerHour?fmtRate:fmt;error.hidden=true;value.textContent=`${format(result.value)} ${result.unit}`;detail.textContent=result.detail;metrics.forEach(metric=>metric.textContent=format(result.metrics?.[metric.dataset.rateMetric]))}catch{showError('These inputs cannot produce a valid estimate. Review the values and units.')}

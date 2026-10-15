@@ -117,7 +117,13 @@ Expansion considered: yes, as the conditional alternative. Priority C discovery 
 
 ## Deployment
 
-Pending implementation commit/push, exact-SHA Pages acceptance, source-parity checks and actual production browser recalculation. Local QA and CI alone are not production completion.
+- Runtime implementation commit **`702eee81a510793b0dc1d9e7ce55ac2b038d8ef8`** pushed to main. Local HEAD, cached origin and actual `ls-remote` matched with clean status at runtime acceptance. [GitHub Pages run 38696275960](https://github.com/canghun13/plasticscalc/actions/runs/38696275960) completed **success** for that exact SHA.
+- Served three changed JS files, unchanged homepage, robots and sitemap all returned HTTP200 and matched repository source after transport LF/CRLF normalization. The seven target HTML documents are unchanged; actual live canonical/footer and rendered units were separately checked.
+- **Actual production Edge QA PASS: 108 page-viewport/state renders / 45 distinct pages / 63 interaction groups**. All37 shared-family calculators and eight controls at390/1024 plus nine cavity workflows' invalid/large states at390. Defaults/one cavity/recalculate/Reset, fractional/zero/negative/unsafe/blank/exponent-overflow rejection, valid128, native step/min1, and explicit runner/cushion zero PASS. Invalid states clear estimates instead of retaining the previous result. Changed fields mark invalid, and Reset clears the state. Parts/Projected controls retain their existing validation contracts.
+- Production console warnings/errors, failed resources, horizontal overflow, detected header/H1 or label/input/unit overlap, clipping/off-screen controls, broken images and invalid result literals **zero**. Reviewed result/input/unit/error contrast minimum **6.06:1**. Actual390px Shot/Energy result and1024px fractional-input rejection screenshots inspected. Mobile MENU/Escape/outside/desktop state PASS. No Copy/Print feature was added or claimed.
+- Live homepage protected suffix: exactly **six links/six images**, all loaded; normalized source matches unchanged repository and the recorded1,731-character suffix hash. The browser checks assert this explicitly. Test browser contexts deny analytics consent in isolation; no owner browser preference was changed. No temporary QA script, raw report or screenshot was committed.
+- Remaining HIGH: none reproduced after this correction. No further in-scope technical/product blocker. Evidence limitations remain: absent Crawled-state export, undated Bing, partially withheld query samples, overlapping GA4 periods, external index selection and no real Google URL Inspection. **Operationally ready.**
+- The following documentation-only closing commit records completed acceptance without changing runtime assets. Its final Git SHA/equality is reported in the session completion report; the independently verified runtime SHA is recorded above.
 
 ## Next state (maximum three)
 

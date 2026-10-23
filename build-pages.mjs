@@ -45,3 +45,4 @@ await import('./phase3-pages.mjs');
 await import('./refresh-assets.mjs');
 await import('./parts-per-hour-pages.mjs');
 await import('./projected-area-pages.mjs');
+await import('./scrap-rate-pages.mjs');

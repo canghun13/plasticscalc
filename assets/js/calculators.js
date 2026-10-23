@@ -105,6 +105,7 @@ function mountCalculator(){
   const tool=tools[root.dataset.calculator];
   if(!tool)return;
   if(root.dataset.calculator==='projected-area'){mountProjectedArea(root);return}
+  if(root.dataset.scrapWorkflow==='runs'){mountScrapRate(root);return}
   const isPartsPerHour=root.dataset.calculator==='parts-per-hour';
   const rateSummary=isPartsPerHour?'<dl class="rate-summary" aria-label="Theoretical rate breakdown"><div><dt>Cycles per hour</dt><dd data-rate-metric="cyclesPerHour">—</dd></div><div><dt>Parts per minute</dt><dd data-rate-metric="partsPerMinute">—</dd></div><div><dt>Parts per cycle</dt><dd data-rate-metric="partsPerCycle">—</dd></div></dl>':'';
   root.innerHTML=`<section class="calc-workstation" aria-label="${tool.name} calculator"><div class="panel calc-input-panel"><p class="workspace-label">Input parameters</p><h2>Calculate ${tool.name}</h2><form id="calc-form" novalidate>${tool.inputs.map(field).join('')}<div class="calc-controls"><button type="submit">Calculate</button><button class="secondary" type="reset">Reset values</button></div><p class="form-error" id="calc-error" role="alert" hidden></p></form></div><aside class="panel result calc-result-panel" aria-live="polite" aria-atomic="true"><p>${isPartsPerHour?'Theoretical rate':'Estimated result'}</p><div class="number" id="calc-value">—</div><p id="calc-detail">Enter values and calculate.</p>${rateSummary}</aside></section>`;

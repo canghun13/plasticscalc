@@ -1,0 +1,31 @@
+/* Target-only workflow. The shared site layout is intentionally unchanged. */
+.scrap-rate-page .hero:after{display:none}
+.scrap-workstation form{display:block}
+.scrap-workstation .scrap-help{font-size:.82rem}
+.scrap-workstation .scrap-runs{display:grid;gap:18px}
+.scrap-workstation .scrap-run{min-width:0;margin:0;padding:14px;border:1px solid var(--line)}
+.scrap-workstation legend{padding:0 6px;font-weight:700}
+.scrap-run-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.scrap-run-fields .calc-field:first-child{grid-column:1/-1}
+.scrap-workstation .calc-controls{flex-wrap:wrap;margin-top:16px}
+.scrap-workstation [data-remove-run]{margin-top:14px}
+.scrap-workstation button[type="submit"]{background:var(--signal-dark);color:var(--white)}
+.scrap-workstation button[type="submit"]:hover{background:#8f2e12}
+/* Shared .secondary forces transparency; this dark-panel control needs a surface. */
+.scrap-workstation [data-copy-scrap]{background:var(--white)!important;color:var(--carbon)}
+.scrap-workstation [data-copy-scrap]:hover{background:#dce5c2!important}
+.scrap-workstation button:disabled{opacity:1;background:#e1e4da;color:#48534c;border-color:#8a938b;cursor:not-allowed}
+.scrap-summary{display:grid;margin:20px 0;border-top:1px solid #53605a}
+.scrap-summary>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid #53605a}
+.scrap-summary dt{color:#c9d2c8;font-size:.82rem}
+.scrap-summary dd{margin:0;color:#fffdf7;font:700 .95rem/1.3 var(--mono);text-align:right;overflow-wrap:anywhere}
+.scrap-workstation #calc-value{overflow-wrap:anywhere}
+.scrap-breakdown{margin-top:28px}
+.scrap-breakdown h2{font-size:1.25rem}
+[data-scrap-breakdown]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.scrap-run-result{min-width:0;padding:16px;background:var(--white);border:1px solid var(--line)}
+.scrap-run-result h3{margin:0 0 10px}
+.scrap-run-result dl{margin:0;color:var(--ink)}
+.scrap-run-result dl>div{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:7px 0}
+.scrap-run-result dd{margin:0;text-align:right;overflow-wrap:anywhere;font-family:var(--mono)}
+@media(max-width:520px){.scrap-run-fields,[data-scrap-breakdown]{grid-template-columns:1fr}}

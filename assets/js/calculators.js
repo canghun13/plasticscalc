@@ -86,6 +86,7 @@ root.innerHTML=`<section class="calc-workstation" aria-label="Projected Area cal
 }
 
 function validateDomain(id,v){
+  if(id==='cycle-time'&&v.fill+v.pack+v.cool+v.motion<=0)return'Total cycle time must be greater than zero.';
   if(['shot-volume','resin-weight'].includes(id)&&v.density<=0)return'Material density must be greater than zero.';
   if(id==='cooling-time'&&(v.alpha<=0||v.melt<=v.mold||v.eject<=v.mold||v.eject>=v.melt))return'Cooling temperatures must satisfy melt > ejection > mold, and thermal diffusivity must be greater than zero.';
   if(id==='parts-per-hour')return tools[id].validate(v);

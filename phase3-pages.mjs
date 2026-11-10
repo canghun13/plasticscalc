@@ -61,7 +61,10 @@ for (const [id, name, description, group, formula, input, example, limitation, s
   page({path:`tools/injection-molding/${id}.html`, title:`${name} | PlasticsCalc`, description, h1:name, type:'SoftwareApplication', body, styles:id === 'regrind-blend' ? regrindStyles : ''});
 }
 
-if (onlyTool) process.exit(0);
+if (onlyTool) {
+  if (onlyTool === 'runner-volume') await import('./runner-volume-pages.mjs');
+  process.exit(0);
+}
 
 for (const [id, name, description, body, sourceAdvice, links, source] of guideData) {
   page({path:`guides/${id}.html`, title:`${name} | PlasticsCalc`, description, h1:name, body:`<section class="hero"><div class="wrap"><p class="eyebrow">Injection molding guide</p><h1>${name}</h1><p class="lead">${description}</p></div></section><article class="wrap section"><section class="guide-reading"><h2>The engineering question</h2><p>${body}</p><h2>What to document</h2><p>${sourceAdvice}</p><h2>Practical workflow</h2><p>${links}</p><h2>Validation boundary</h2><p>Use manufacturer documentation, grade-specific supplier data, controlled process records, and trials for any equipment, quality, material, or commercial commitment. A static calculator is a transparent starting point, not a simulation or approval.</p><h2>Reference</h2><p>${sourceLinks[source]}</p></section></article>`});

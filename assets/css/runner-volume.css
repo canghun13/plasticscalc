@@ -1,0 +1,14 @@
+.runner-volume-page .runner-group{margin:14px 0;padding:12px;min-width:0;border:1px solid var(--line)}
+.runner-volume-page .runner-group legend{font-weight:700;padding:0 5px}
+.runner-volume-page [data-runner-groups],.runner-volume-page form>.runner-help{grid-column:1/-1}
+.runner-volume-page .runner-group .calc-field{margin-bottom:12px}
+.runner-volume-page .runner-help{font-size:.85rem;line-height:1.55}
+.runner-volume-page .runner-breakdown{margin:12px 0;padding:12px;border:1px solid #66716c;background:#202a27;color:#fffdf7;overflow-wrap:anywhere}
+.runner-volume-page .runner-breakdown h3{color:#fffdf7;font-size:1rem;margin:0 0 6px}
+.runner-volume-page .runner-breakdown p{color:#e8ece1;margin:0;font-size:.85rem}
+.runner-volume-page .runner-conversion{font-weight:700;color:#fffdf7}
+.runner-volume-page .number{overflow-wrap:anywhere}
+.runner-volume-page [data-runner-copy]{width:100%;background:#fffdf7!important;color:#17221f}
+.runner-volume-page [data-runner-copy]:hover{background:#e2e6d8!important;color:#17221f}
+.runner-volume-page button:disabled{opacity:1;color:#414d47;background:#e2e6d8;border-color:#66716c;cursor:not-allowed}
+.runner-volume-page [hidden]{display:none!important}

@@ -101,10 +101,20 @@ PriorityB selected; PriorityC not entered. No40-family discovery,10–14mid-list
 
 ## Deployment
 
-Runtime push, exact-SHA Pages and actual production source/browser acceptance pending in this initial record. Local QA is not production acceptance. Append closure only after the real target and both shared Phase3JS URLs match, then repeat actual mobile/desktop calculations, conversion, add/remove, validation, Copy and Reset.
+- Runtime commit **`014556bc074e4c673730fd59c8ad4af10e9a9c8f`** pushed; local/origin/actual remote matched with a clean tree before documentation closure. Exact-SHA [Pages run42735753876](https://github.com/canghun13/plasticscalc/actions/runs/42735753876) completed **success**. Queued/in-progress states were awaited, not accepted as deployment completion.
+- Ten actual resources200/HTTPS-apex/source-match after LF/CRLF normalization: Runner HTML, both unversioned and target-query shared Phase3JS, new target JS/CSS query URLs, untouched homepage/sharedCSS/consent-menuJS/robots/sitemap. Existing max-age600 accounted for through actual resource matching, not a CI-only pass.
+- Actual production installed Edge **30pages/83page-viewport-state renders/35interaction groups PASS** at390/1024, including23target state renders. Local36 versus production35 groups differs only by the separate original live before-state proof; the35functional/control groups are repeated. Mixed29.82/per-group7.2, physical mm/in equivalence, actual clipboard, add/remove/renumber, stale clearing/validation/extremes/20groups/Reset/reload/fallback/menu and four related changed/blank/Reset workflows passed.
+- Minimum sampled contrast4.5127:1; warnings/errors/failed requests, page overflow, monitored overlap/clipping/off-screen controls, broken images, invalid numeric literals and canonical/footer failures0. All six badge images loaded. Actual native390mixed result and representative1024/390screenshots opened and inspected. Source header/footer/hash protection unchanged. No whole-site accessibility certification claimed.
+- **Runner workflow operationally ready.** QA browsers and owned local server closed. No temporary evidence or reports committed. Closing documentation-only commit records acceptance; final local/origin/actual SHA equality and clean state are checked in the completion report, without changing runtime.
+
+## Separate pre-existing observation, not fixed in Runner scope
+
+Final representative screenshot review found a **non-blocking Masterbatch mode-visibility issue**: in total-blend mode, the active-content and target fields have `hidden=true` and `disabled=true`, but their wrappers compute `display:grid` and remain visible. The shared author-level field display overrides the native hidden display. This is not introduced by Runner: an isolated actual-browser comparison using the exact start-commit Phase3JS and the deployed JS produced identical flags,228.72px visible field widths and results. Total example remains4kg; active mode at2% target/40% concentrate/200kg correctly returns10kg. Disabled inputs are excluded from the inactive mode's calculation.
+
+Do not claim all pre-existing UI issues resolved. The new Runner's explicit scoped hidden rule works and its inactive fields are not displayed. Shared CSS and the existing Masterbatch code/HTML were left unchanged to preserve the one-selected-workflow scope; a separate target-only mode-visibility correction is queued. This is a known MEDIUM usability issue, not a Runner regression, wrong recipe or release blocker. Remaining evidence limits also include absent Crawled export, withheld/aggregate-only query data, undated Bing, overlapping GA4 and external indexing.
 
 ## Next state (maximum three)
 
-1. Observe dated Runner and Scrap query/page evidence after recrawl; no causal interpretation of rolling snapshot differences.
-2. Keep the exact nine-URL discovered cohort separate; use a Crawled export if supplied, no repeated scheduling audit without a new defect.
-3. If no higher-priority technical/existing opportunity wins, refresh the full historical exclusions before40+ genuinely-new family discovery.
+1. Correct the separately reproduced pre-existing Masterbatch inactive-field visibility with a target-only scope and before/after mode tests; retain recipe arithmetic.
+2. Observe dated Runner and Scrap query/page evidence after recrawl; no causal interpretation of rolling snapshot differences.
+3. Keep the exact nine-URL discovered cohort separate; use a Crawled export if supplied, no repeated scheduling audit without a new defect.

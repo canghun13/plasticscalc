@@ -215,3 +215,5 @@
 .calculator[data-calculator="cooling-circuit-balance"] .calc-result-panel>.panel{color:var(--ink)}
 /* Film templates turn focused submit text white; give it the matching hover surface. */
 .film-testing-page .calc-controls button[type="submit"]:focus-visible{background:var(--signal-dark);border-color:var(--signal-dark)}
+/* Inactive recipe inputs stay hidden without changing the visible-field grid. */
+.calculator[data-calculator="masterbatch-dosage"] .calc-field[hidden]{display:none}

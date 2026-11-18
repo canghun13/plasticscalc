@@ -85,7 +85,11 @@ Priority C not entered. No new 40-family broad discovery, 10–14 mid-list, 4–
 
 ## Deployment
 
-Runtime commit/push, exact-SHA Pages success and actual production browser acceptance are pending in this initial record. Do not confuse local QA or CI alone with production acceptance. Close this section only after all actual CSS variants match and actual mobile/desktop mode, recipe, validation, Reset and representative controls pass.
+- Runtime commit **`008d0d86f36606a00bababf5bdb940370488cb20`** pushed to main; local/origin/actual remote matched with a clean tree. Exact-SHA [Pages run 44242534133](https://github.com/canghun13/plasticscalc/actions/runs/44242534133) completed **success**. Queued/in-progress states were awaited rather than accepted as completion.
+- All **19 actual resources** returned200/HTTPS-apex/source-match, including all nine existing CSS query URLs and unversioned CSS. Actual HTML/JS/homepage/robots/sitemap and Runner assets unchanged/source-matched; no cache-version rewrite required. Current max-age600 was handled by actual file matching, not an assumption from CI.
+- Actual production installed Edge **102 pages / 250 page-viewport-state renders / 39 interaction groups PASS**: target all six widths and all other101pages at390/1024. Three modes actually hide the correct inactive fields, submit only active inputs and retain the expected recipes; validation/inactive-bad-field/Reset/reload/keyboard/MENU and related controls passed. Every non-target page has zero matches for the new rule's selector.
+- Supplemental production large/small/boundary valid cases, unit/error contrast, fresh Decline/reload/no analytics and **six of six loaded owner badge images** passed. Target minimum sampled contrast4.6776, unit6.0556, error6.6486; warnings/errors/failed resources/overflow/off-screen controls/invalid numeric literals0, monitored target field overlap/clipping0. Actual390active and1024total screenshots opened and visually inspected; not a whole-site accessibility certification.
+- **Operationally ready: the previously recorded Masterbatch MEDIUM visibility issue is corrected.** Existing recipe arithmetic and Runner/Cycle fixes retained. QA browsers and owned local server closed. Temporary metrics/QA/screenshots not committed. Closing documentation-only commit records this acceptance; final exact-SHA Pages/source matching and local/origin/actual equality/clean state are checked in the completion report without changing runtime.
 
 ## Next state (maximum three)
 

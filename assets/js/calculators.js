@@ -1,6 +1,6 @@
 const tools={
   'clamp-tonnage':{name:'Clamp Tonnage',inputs:[['area','Total projected area',100,'in&sup2;'],['pressure','Estimated cavity pressure',4000,'psi'],['safety','Safety factor',1.1,'&times;']],calc:v=>({value:v.area*v.pressure*v.safety/2000,unit:'US tons',detail:'Required clamp force = projected area × cavity pressure × safety factor ÷ 2,000.'})},
-  'shot-size':{name:'Shot Size',inputs:[['weight','Part weight',45,'g'],['cavities','Cavities',4,'whole cavities'],['runner','Cold runner/sprue weight',12,'g'],['cushion','Cushion',10,'%']],calc:v=>{const shot=(v.weight*v.cavities+v.runner)*(1+v.cushion/100);return{value:shot,unit:'g per shot',detail:`Total parts: ${(v.weight*v.cavities).toFixed(1)} g. Required shot includes the entered cushion.`}}},
+  'shot-size':{name:'Shot Size',inputs:[['weight','Part weight',45,'g'],['cavities','Cavities',4,'whole cavities'],['runner','Cold runner/sprue weight',12,'g'],['cushion','Planning allowance',10,'% of molded shot mass']],calc:calculateShotMass},
   'shot-volume':{name:'Shot Volume',inputs:[['weight','Shot weight',180,'g'],['density','Melt density',0.95,'g/cm&sup3;']],calc:v=>({value:v.weight/v.density,unit:'cm³',detail:'Use melt density when comparing to a machine barrel capacity.'})},
   'projected-area':{name:'Projected Area',inputs:[['length','Projected length',120,'mm'],['width','Projected width',80,'mm'],['cavities','Cavities',2,''],['runner','Runner projected area',12,'cm&sup2;']],calc:calculateProjectedArea},
   'cycle-time':{name:'Cycle Time',inputs:[['fill','Fill/injection time',2.5,'s'],['pack','Pack/hold time',5,'s'],['cool','Cooling time',18,'s'],['motion','Open, eject and close time',5,'s']],calc:v=>({value:v.fill+v.pack+v.cool+v.motion,unit:'s/cycle',detail:`Cooling share: ${(v.cool/(v.fill+v.pack+v.cool+v.motion)*100).toFixed(1)}%.`})},
@@ -22,6 +22,13 @@ const tools={
 const fmt=n=>Number.isFinite(n)?new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(n):'Check inputs';
 const fmtRate=n=>Number.isFinite(n)?new Intl.NumberFormat('en-US',{maximumSignificantDigits:8}).format(n):'Check inputs';
 const fmtProjectedArea=n=>Number.isFinite(n)?new Intl.NumberFormat('en-US',{maximumSignificantDigits:8,notation:n!==0&&(Math.abs(n)>=1e9||Math.abs(n)<1e-6)?'scientific':'standard'}).format(n):'Check inputs';
+const fmtShotMass=fmtProjectedArea;
+function calculateShotMass(v){
+  const parts=v.weight*v.cavities,moldedMass=parts+v.runner,allowance=moldedMass*(v.cushion/100);
+  // Keep the legacy planning value for the registry; the page leads with physical molded mass.
+  const value=moldedMass+allowance;
+  return{value,moldedMass,parts,allowance,unit:'g per shot',detail:`Parts: ${fmtShotMass(parts)} g. Cold runner/sprue: ${fmtShotMass(v.runner)} g. Planning mass: ${fmtShotMass(value)} g including ${fmtShotMass(allowance)} g allowance. This allowance is not ejected mass or a screw-cushion setting.`};
+}
 const field=([key,label,defaultValue,unit])=>`<div class="calc-field"><label for="${key}">${label}</label><input id="${key}" name="${key}" type="number" step="${key==='cavities'?'1':'any'}" min="${key==='cavities'?'1':'0'}" required value="${defaultValue}" aria-describedby="${key}-unit"><span class="unit" id="${key}-unit">${unit||'Unitless input'}</span></div>`;
 
 function validateProjectedArea(v){
@@ -108,8 +115,9 @@ function mountCalculator(){
   if(root.dataset.calculator==='projected-area'){mountProjectedArea(root);return}
   if(root.dataset.scrapWorkflow==='runs'){mountScrapRate(root);return}
   const isPartsPerHour=root.dataset.calculator==='parts-per-hour';
+  const isShotSize=root.dataset.calculator==='shot-size';
   const rateSummary=isPartsPerHour?'<dl class="rate-summary" aria-label="Theoretical rate breakdown"><div><dt>Cycles per hour</dt><dd data-rate-metric="cyclesPerHour">—</dd></div><div><dt>Parts per minute</dt><dd data-rate-metric="partsPerMinute">—</dd></div><div><dt>Parts per cycle</dt><dd data-rate-metric="partsPerCycle">—</dd></div></dl>':'';
-  root.innerHTML=`<section class="calc-workstation" aria-label="${tool.name} calculator"><div class="panel calc-input-panel"><p class="workspace-label">Input parameters</p><h2>Calculate ${tool.name}</h2><form id="calc-form" novalidate>${tool.inputs.map(field).join('')}<div class="calc-controls"><button type="submit">Calculate</button><button class="secondary" type="reset">Reset values</button></div><p class="form-error" id="calc-error" role="alert" hidden></p></form></div><aside class="panel result calc-result-panel" aria-live="polite" aria-atomic="true"><p>${isPartsPerHour?'Theoretical rate':'Estimated result'}</p><div class="number" id="calc-value">—</div><p id="calc-detail">Enter values and calculate.</p>${rateSummary}</aside></section>`;
+  root.innerHTML=`<section class="calc-workstation" aria-label="${tool.name} calculator"><div class="panel calc-input-panel"><p class="workspace-label">Input parameters</p><h2>Calculate ${tool.name}</h2><form id="calc-form" novalidate>${tool.inputs.map(field).join('')}<div class="calc-controls"><button type="submit">Calculate</button><button class="secondary" type="reset">Reset values</button></div><p class="form-error" id="calc-error" role="alert" hidden></p></form></div><aside class="panel result calc-result-panel" aria-live="polite" aria-atomic="true"><p>${isPartsPerHour?'Theoretical rate':isShotSize?'Molded shot mass':'Estimated result'}</p><div class="number" id="calc-value">—</div><p id="calc-detail">Enter values and calculate.</p>${rateSummary}</aside></section>`;
   const form=root.querySelector('form');
   if(isPartsPerHour){const cavityInput=form.querySelector('[name="cavities"]');cavityInput.step='1';cavityInput.min='1'}
   const error=root.querySelector('#calc-error');
@@ -123,7 +131,7 @@ function mountCalculator(){
     Object.keys(values).forEach(key=>{const raw=values[key];values[key]=Number(raw);const input=form.querySelector(`[name="${key}"]`);const badCavities=key==='cavities'&&(!Number.isSafeInteger(values[key])||values[key]<1);const bad=raw.trim()===''||!Number.isFinite(values[key])||values[key]<0||badCavities;input.setAttribute('aria-invalid',bad?'true':'false');if(bad&&!invalid)invalid=badCavities?'Cavities must be a positive whole number.':`Enter a valid non-negative value for ${tool.inputs.find(input=>input[0]===key)[1]}.`});
     invalid||=validateDomain(root.dataset.calculator,values);
     if(invalid){showError(invalid);return}
-    try{const result=tool.calc(values);if(!Number.isFinite(result.value))throw Error();const format=isPartsPerHour?fmtRate:fmt;error.hidden=true;value.textContent=`${format(result.value)} ${result.unit}`;detail.textContent=result.detail;metrics.forEach(metric=>metric.textContent=format(result.metrics?.[metric.dataset.rateMetric]))}catch{showError('These inputs cannot produce a valid estimate. Review the values and units.')}
+    try{const result=tool.calc(values);const primary=isShotSize?result.moldedMass:result.value;if(!Number.isFinite(result.value)||!Number.isFinite(primary))throw Error();const format=isPartsPerHour?fmtRate:isShotSize?fmtShotMass:fmt;error.hidden=true;value.textContent=`${format(primary)} ${result.unit}`;detail.textContent=result.detail;metrics.forEach(metric=>metric.textContent=format(result.metrics?.[metric.dataset.rateMetric]))}catch{showError('These inputs cannot produce a valid estimate. Review the values and units.')}
   };
   form.addEventListener('submit',event=>{event.preventDefault();calculate()});
   form.addEventListener('reset',()=>setTimeout(calculate));

@@ -1,5 +1,14 @@
 # PlasticsCalc — Project Handover
 
+## Latest weekly state — 2026-11-24
+
+- **FIX — Shot Size molded mass versus allowance.** Details: `research/weekly-growth-review-2026-11-24.md`. Clean canonical `main` started local/cached/actual `88015f7cb2b2565522ead0e4506dee6cbeab68f9`, fetched after ls-remote, 0/0/no pull. No new tool, URL, cluster or sitemap change. Inventory 102 public/101 indexable/63 tools; Film latest cluster, Runner latest search-led upgrade.
+- Five current reports read-only. GSC Aug22–Nov21 **163/9,432/1.7282%/approx20.95**. Nov15–21 898/17/1.8931%/18.85 vs Nov8–14 850/11/1.2941%/22.51, +5.65% impressions, +54.55% clicks, +0.5990pp CTR, 3.67 positions better. Independent aggregates reproduced; moving snapshot no causal inference. Projected54/2479/6.80, Scrap9/1138/10.41, Parts5/1042/7.42, Shot8/298/26.92, Runner4/167/9.26.
+- Coverage Aug28–Nov16, **8 discovered URLs vs 9**; Wall Thickness Uniformity no longer in this issue table, not proven indexed. Crawled-not-indexed unknown. GA4 Oct27–Nov23 23active/20new/226events/64.74s; Google7first-user/9sessions, Bing4/4, ChatGPT2/2. Bing page80rows 1,579/99; keyword780rows 1,245/99; no period/non-additive. No organic WoW inference from GA4/Bing.
+- Live390/1024 reproduced 211.2g shown as shot including allowance, and 180g with both runner/allowance zero contradicting page guidance. Shot Volume healthy 189.47cm³; Masterbatch hide fix preserved. Render 192g molded primary/211.2g planning secondary with 19.2g illustrative allowance. Machine cushion is residual melt, not ejected mass. Same inputs/defaults/legacy planning arithmetic; target JS opt-in display, narrow guide/hub alignment and idempotent finalizer. No CSS/global layout/headers/footer/sitemap changes; six owner links/images and original hash preserved.
+- 29suites/61syntax/verifier102/101/zero issues; six new independent fixtures. Local101indexable pages/341render states/40interaction groups, contrast4.6776, zero monitored errors, six live badges and Decline/no analytics. Initial 15 production resources source-match. Runtime deploy/production replay pending at initial record.
+- Priority A resolves observed output-basis defect; no new Priority B score/expansion discovery or exclusion refresh. Next: retain distinction/regression; dated Runner/Scrap/Projected evidence; exact eight-URL discovered cohort and independently verify Wall Thickness Uniformity when better data is supplied.
+
 ## Latest weekly state — 2026-11-18
 
 - Decision: **FIX — technical defect corrected: Masterbatch inactive mode fields remained visible**. Full evidence/periods/metrics/diagnosis/QA in `research/weekly-growth-review-2026-11-18.md`. One target-scoped CSS rule; no new calculator/page/URL/cluster or growth rewrite. November10 Runner upgrade retained.
